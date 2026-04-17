@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #faf7f2;
+  --warm: #f0e8d8;
+  --ink: #1a1410;
+  --ink-soft: #4a3f35;
+  --ink-muted: #8a7a6a;
+  --rose: #c4756a;
+  --border: rgba(26,20,16,0.12);
+}
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+  font-weight: 300;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.5;
+}
+.hidden { display: none !important; }
+#loginPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.login-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 2.5rem;
+}
+.login-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 8vw, 4.5rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.1;
+  text-align: center;
+  color: var(--ink);
+  margin-bottom: 3rem;
+  max-width: 420px;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 300px;
+}
+.login-form input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+.login-form input::placeholder { color: var(--ink-muted); }
+.login-form input:focus { border-bottom-color: var(--rose); }
+.btn-primary {
+  margin-top: 1rem;
+  background: var(--ink);
+  color: var(--cream);
+  border: none;
+  padding: 0.9rem 2rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.15s;
+  border-radius: 2px;
+}
+.btn-primary:hover { background: var(--rose); transform: translateY(-1px); }
+.login-hint {
+  margin-top: 2rem;
+  font-size: 12px;
+  color: var(--ink-muted);
+  font-style: italic;
+}
+#mainPage {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 1.25rem 4rem;
+}
+.site-header {
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+}
+.site-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.counter-block { text-align: right; }
+.counter-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--ink);
+}
+.counter-label {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 4px;
+}
+.site-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 6vw, 3rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.1;
+  color: var(--ink);
+}
+.site-subtitle { font-size: 13px; color: var(--ink-muted); margin-top: 0.4rem; }
+.section {
+  margin-bottom: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  animation: fadeIn 0.4s ease both;
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 1.25rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+.section-header:hover { background: var(--warm); }
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ink);
+  margin-top: 2px;
+}
+.section-toggle { font-size: 20px; color: var(--ink-muted); line-height: 1; }
+.section-body {
+  display: none;
+  padding: 0 1.25rem 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.section-body.open { display: block; }
+.message-display {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--ink);
+  padding: 1.5rem 0 0.5rem;
+}
+.message-date { font-size: 11px; color: var(--ink-muted); letter-spacing: 0.1em; }
+.wheel-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 0;
+  gap: 1rem;
+}
+.wheel-container { position: relative; width: 260px; height: 260px; }
+.wheel-pointer {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 18px solid var(--rose);
+  z-index: 10;
+}
+#wheelCanvas { width: 260px; height: 260px; border-radius: 50%; }
+.wheel-result {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--rose);
+  min-height: 1.5rem;
+  text-align: center;
+}
+.fact-display {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--ink);
+  padding: 1.2rem 0;
+  min-height: 3rem;
+}
+.miss-display {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--rose);
+  padding: 1rem 0;
+  min-height: 2.5rem;
+}
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 1rem 0; }
+.gallery-item { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: 3px; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gallery-delete {
+  position: absolute; top: 6px; right: 6px;
+  background: rgba(26,20,16,0.7); color: white;
+  border: none; border-radius: 50%;
+  width: 24px; height: 24px; font-size: 14px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.2s;
+}
+.gallery-item:hover .gallery-delete { opacity: 1; }
+.upload-label {
+  display: inline-block;
+  font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-muted); border: 1px solid var(--border);
+  padding: 0.6rem 1.2rem; border-radius: 2px; cursor: pointer;
+  transition: all 0.2s; margin: 0.75rem 0;
+}
+.upload-label:hover { border-color: var(--rose); color: var(--rose); }
+#imageUpload { display: none; }
+.msg-input-wrap { margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+.msg-input-label {
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 0.5rem; display: block;
+}
+textarea {
+  width: 100%; border: 1px solid var(--border); background: transparent;
+  padding: 0.75rem; font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 300; color: var(--ink);
+  outline: none; resize: vertical; min-height: 80px;
+  border-radius: 2px; transition: border-color 0.3s;
+}
+textarea:focus { border-color: var(--rose); }
+.message-card {
+  border: 1px solid var(--border); border-radius: 3px;
+  padding: 0.9rem 1rem; margin-top: 0.6rem;
+  font-size: 14px; line-height: 1.6; color: var(--ink-soft);
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem;
+}
+.msg-delete {
+  background: none; border: none; color: var(--ink-muted);
+  cursor: pointer; font-size: 16px; line-height: 1;
+  flex-shrink: 0; padding: 0; transition: color 0.2s;
+}
+.msg-delete:hover { color: var(--rose); }
+.btn-soft {
+  background: transparent; border: 1px solid var(--border);
+  color: var(--ink-soft); padding: 0.6rem 1.2rem;
+  font-family: 'DM Sans', sans-serif; font-size: 12px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; border-radius: 2px; transition: all 0.2s; margin-top: 0.75rem;
+}
+.btn-soft:hover { border-color: var(--rose); color: var(--rose); }
+.chapter-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 1.25rem; border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--ink-muted); letter-spacing: 0.1em;
+}
+.chapter-nav button {
+  background: none; border: none; color: var(--ink-muted);
+  cursor: pointer; font-size: 18px; padding: 0 0.5rem; transition: color 0.2s;
+}
+.chapter-nav button:hover { color: var(--rose); }
+.chapter-nav button:disabled { opacity: 0.25; cursor: default; }
+.chapter-prose {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; font-weight: 300; line-height: 2;
+  color: var(--ink); padding: 2rem 1.25rem 1rem;
+}
+.chapter-prose p { margin-bottom: 1.4rem; }
+.chapter-prose p:last-child { margin-bottom: 0; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<div id="loginPage">
+  <p class="login-eyebrow">a place made for you</p>
+  <h1 class="login-title">come in,<br>i've been waiting</h1>
+  <div class="login-form">
+    <input id="username" placeholder="who are you?" autocomplete="off">
+    <input id="password" type="password" placeholder="our password">
+    <button class="btn-primary" id="enterBtn">Enter</button>
+  </div>
+  <p class="login-hint">you know the words</p>
+</div>
+
+<div id="mainPage" class="hidden">
+  <header class="site-header">
+    <div class="site-header-top">
+      <div>
+        <h1 class="site-title">for you,<br>always</h1>
+        <p class="site-subtitle">a small world i built</p>
+      </div>
+      <div class="counter-block">
+        <div class="counter-number" id="dayCount">—</div>
+        <div class="counter-label">days</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="section" style="animation-delay:0.05s">
+    <div class="section-header" id="hdr-msg">
+      <div><div class="section-label">Today</div><div class="section-title">Daily message</div></div>
+      <span class="section-toggle" id="tog-msg">+</span>
+    </div>
+    <div class="section-body" id="body-msg">
+      <div class="message-display" id="dailyMessage">—</div>
+      <div class="message-date" id="msgDate"></div>
+    </div>
+  </div>
+
+  <div class="section" style="animation-delay:0.1s">
+    <div class="section-header" id="hdr-wheel">
+      <div><div class="section-label">For us</div><div class="section-title">Spin the wheel</div></div>
+      <span class="section-toggle" id="tog-wheel">+</span>
+    </div>
+    <div class="section-body" id="body-wheel">
+      <div class="wheel-wrap">
+        <div class="wheel-container">
+          <div class="wheel-pointer"></div>
+          <canvas id="wheelCanvas" width="260" height="260"></canvas>
+        </div>
+        <button class="btn-soft" id="spinBtn">Spin</button>
+        <div class="wheel-result" id="wheelResult"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="animation-delay:0.15s">
+    <div class="section-header" id="hdr-fact">
+      <div><div class="section-label">About me</div><div class="section-title">Something true</div></div>
+      <span class="section-toggle" id="tog-fact">+</span>
+    </div>
+    <div class="section-body" id="body-fact">
+      <div class="fact-display" id="factText">—</div>
+      <button class="btn-soft" id="factBtn">Another one</button>
+    </div>
+  </div>
+
+  <div class="section" style="animation-delay:0.18s">
+    <div class="section-header" id="hdr-miss">
+      <div><div class="section-label">Just wondering</div><div class="section-title">Miss me?</div></div>
+      <span class="section-toggle" id="tog-miss">+</span>
+    </div>
+    <div class="section-body" id="body-miss">
+      <div class="miss-display" id="missText">—</div>
+      <button class="btn-soft" id="missBtn">Click if yes</button>
+    </div>
+  </div>
+
+  <div class="section" style="animation-delay:0.2s">
+    <div class="section-header" id="hdr-moments">
+      <div><div class="section-label">Us</div><div class="section-title">Moments</div></div>
+      <span class="section-toggle" id="tog-moments">+</span>
+    </div>
+    <div class="section-body" id="body-moments">
+      <div class="gallery-grid" id="gallery"></div>
+      <label class="upload-label" for="imageUpload">+ Add photo</label>
+      <input type="file" id="imageUpload" accept="image/*">
+      <div class="msg-input-wrap">
+        <span class="msg-input-label">Leave a note</span>
+        <textarea id="msgInput" placeholder="write something..."></textarea>
+        <button class="btn-soft" id="postBtn">Post</button>
+        <div id="messageBoard"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="animation-delay:0.25s">
+    <div class="section-header" id="hdr-memories">
+      <div><div class="section-label">Writing</div><div class="section-title">memories i look back at</div></div>
+      <span class="section-toggle" id="tog-memories">+</span>
+    </div>
+    <div class="section-body" id="body-memories" style="padding:0;">
+
+      <div id="contents-view" style="padding:1.25rem;">
+        <p style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:1rem;">Contents</p>
+        <div id="link-ch1" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;border-bottom:1px solid var(--border);cursor:pointer;">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">Chapter I</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:2px;">the piano video</div>
+          </div>
+          <span style="color:var(--ink-muted);font-size:18px;">→</span>
+        </div>
+        <div id="link-ch2" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;border-bottom:1px solid var(--border);cursor:pointer;">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">Chapter II</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:2px;">seen</div>
+          </div>
+          <span style="color:var(--ink-muted);font-size:18px;">→</span>
+        </div>
+        <div id="link-ch3" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;cursor:pointer;">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">Chapter III</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:2px;">the umbrella</div>
+          </div>
+          <span style="color:var(--ink-muted);font-size:18px;">→</span>
+        </div>
+      </div>
+
+      <div id="reader-ch1" style="display:none;">
+        <div id="back-ch1" style="display:flex;align-items:center;gap:0.5rem;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;">
+          <span style="color:var(--ink-muted);font-size:16px;">←</span>
+          <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);">Back</span>
+        </div>
+        <div class="chapter-prose" id="ch1prose"></div>
+        <div class="chapter-nav">
+          <button id="ch1prev">←</button>
+          <span id="ch1pager">1 / 1</span>
+          <button id="ch1next">→</button>
+        </div>
+      </div>
+
+      <div id="reader-ch2" style="display:none;">
+        <div id="back-ch2" style="display:flex;align-items:center;gap:0.5rem;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;">
+          <span style="color:var(--ink-muted);font-size:16px;">←</span>
+          <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);">Back</span>
+        </div>
+        <div class="chapter-prose" id="ch2prose"></div>
+        <div class="chapter-nav">
+          <button id="ch2prev">←</button>
+          <span id="ch2pager">1 / 1</span>
+          <button id="ch2next">→</button>
+        </div>
+      </div>
+
+      <div id="reader-ch3" style="display:none;">
+        <div id="back-ch3" style="display:flex;align-items:center;gap:0.5rem;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;">
+          <span style="color:var(--ink-muted);font-size:16px;">←</span>
+          <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);">Back</span>
+        </div>
+        <div class="chapter-prose" id="ch3prose"></div>
+        <div class="chapter-nav">
+          <button id="ch3prev">←</button>
+          <span id="ch3pager">1 / 1</span>
+          <button id="ch3next">→</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDNRuDhGAi7iAXL4KzAOuZ4TGS7gWn-K-U",
+  authDomain: "my-true-north.firebaseapp.com",
+  projectId: "my-true-north",
+  storageBucket: "my-true-north.firebasestorage.app",
+  messagingSenderId: "635641816039",
+  appId: "1:635641816039:web:51bb2bcb23cf648a599342"
+};
+
+let db, firebaseReady = false;
+try {
+  const app = firebase.apps.length ? firebase.apps[0] : firebase.initializeApp(firebaseConfig);
+  db = app.firestore();
+  firebaseReady = true;
+} catch(e) { console.warn('Firebase failed, using localStorage', e); }
+
+// LOGIN
+document.getElementById('enterBtn').addEventListener('click', login);
+document.getElementById('password').addEventListener('keypress', function(e){ if(e.key==='Enter') login(); });
+
+function login() {
+  const u = document.getElementById('username').value.trim().toLowerCase();
+  const p = document.getElementById('password').value.trim().toLowerCase();
+  if (u === 'my true north' && p === 'whateverrr') {
+    document.getElementById('loginPage').classList.add('hidden');
+    document.getElementById('mainPage').classList.remove('hidden');
+    init();
+  } else {
+    const pw = document.getElementById('password');
+    pw.style.borderBottomColor = '#c4756a';
+    setTimeout(() => pw.style.borderBottomColor = '', 1000);
+  }
+}
+
+function init() {
+  setDayCounter();
+  setDailyMessage();
+  drawWheel();
+  loadImages();
+  loadMessages();
+  setupSections();
+  setupButtons();
+  setupChapters();
+}
+
+// DAY COUNTER
+const START_DATE = new Date('2025-07-31');
+function setDayCounter() {
+  document.getElementById('dayCount').textContent = Math.floor((new Date() - START_DATE) / 86400000);
+}
+
+// DAILY MESSAGE
+const dailyMessages = [
+  "You make my whole day better just by existing.",
+  "I miss you a little extra today.",
+  "You are my favourite notification.",
+  "I think about you more than I probably should.",
+  "Being known by you feels like the best thing.",
+  "You calm something in me I didn't know was loud.",
+  "Today I caught myself smiling because of you. Again.",
+  "You are my favourite habit.",
+  "I don't know how to explain you to people, but I don't want to stop trying.",
+  "Some days the best part is just knowing you're there.",
+  "You make the ordinary feel different.",
+  "I'm glad I found you.",
+  "You are worth every unsent message and every one I did send.",
+  "Still you. Always you.",
+];
+function setDailyMessage() {
+  const today = new Date();
+  const day = Math.floor((today - new Date(today.getFullYear(),0,0)) / 86400000);
+  document.getElementById('dailyMessage').textContent = dailyMessages[day % dailyMessages.length];
+  document.getElementById('msgDate').textContent = today.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+}
+
+// SECTIONS
+function setupSections() {
+  ['msg','wheel','fact','miss','moments','memories'].forEach(id => {
+    document.getElementById('hdr-'+id).addEventListener('click', () => {
+      const body = document.getElementById('body-'+id);
+      const tog = document.getElementById('tog-'+id);
+      const open = body.classList.toggle('open');
+      tog.textContent = open ? '×' : '+';
+      if (id === 'wheel' && open) drawWheel();
+    });
+  });
+}
+
+// WHEEL
+const wheelOptions = ["Selfie. Right now.","Tell me something you haven't said.","Pick what we watch tonight.","Say what you miss about me.","Voice note. Go.","One compliment. Make it count."];
+const wheelColors = ['#e8c4be','#d4b5a0','#c4a882','#b89a6e','#a88c64','#9a7e58'];
+let wheelAngle = 0, spinning = false;
+
+function drawWheel(deg) {
+  deg = deg || 0;
+  const canvas = document.getElementById('wheelCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const cx=130, cy=130, r=128, arc=(2*Math.PI)/wheelOptions.length;
+  ctx.clearRect(0,0,260,260);
+  for (let i=0; i<wheelOptions.length; i++) {
+    const s = arc*i + deg*Math.PI/180, e = arc*(i+1) + deg*Math.PI/180;
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,r,s,e);
+    ctx.fillStyle=wheelColors[i]; ctx.fill();
+    ctx.strokeStyle='#faf7f2'; ctx.lineWidth=1.5; ctx.stroke();
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(s+arc/2);
+    ctx.textAlign='right'; ctx.fillStyle='#1a1410'; ctx.font='500 11px DM Sans';
+    const words=wheelOptions[i].split(' '); let line='', y=-4;
+    words.forEach(w => {
+      if((line+w).length>12){ctx.fillText(line.trim(),r-10,y);line=w+' ';y+=14;}
+      else line+=w+' ';
+    });
+    ctx.fillText(line.trim(),r-10,y); ctx.restore();
+  }
+  ctx.beginPath(); ctx.arc(cx,cy,14,0,2*Math.PI);
+  ctx.fillStyle='#faf7f2'; ctx.fill();
+  ctx.strokeStyle='#1a1410'; ctx.lineWidth=1; ctx.stroke();
+}
+
+function spinWheel() {
+  if (spinning) return;
+  spinning = true;
+  document.getElementById('wheelResult').textContent = '';
+  const amount = 1440 + Math.floor(Math.random()*720);
+  const from = wheelAngle, start = performance.now(), dur = 4000;
+  function ease(t){return 1-Math.pow(1-t,4);}
+  function frame(now) {
+    const t = Math.min((now-start)/dur,1);
+    drawWheel(from + amount*ease(t));
+    if(t<1){requestAnimationFrame(frame);return;}
+    wheelAngle = (from+amount)%360;
+    spinning = false;
+    const idx = Math.floor(((360-wheelAngle%360)%360)/(360/wheelOptions.length))%wheelOptions.length;
+    document.getElementById('wheelResult').textContent = wheelOptions[idx];
+  }
+  requestAnimationFrame(frame);
+}
+
+// FACTS
+const facts = ["I think about you more than I let on.","You calm me down without trying.","You're my favourite habit.","I notice when you're quiet.","You make ordinary things feel different.","I'm still figuring out how to say most of this.","You are the thing I don't want to overthink.","I keep things because they remind me of you."];
+let lastFact = -1;
+function showFact() {
+  let idx; do{idx=Math.floor(Math.random()*facts.length);}while(idx===lastFact);
+  lastFact=idx; document.getElementById('factText').textContent=facts[idx];
+}
+
+// MISS ME
+const missReplies = ["Of course you do.","I know.","Good.","I miss you too. More than you think.","Obviously."];
+let missIdx = 0;
+function missMe() { document.getElementById('missText').textContent=missReplies[missIdx++%missReplies.length]; }
+
+// IMAGES
+function addImage() {
+  const file = document.getElementById('imageUpload').files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    const src = e.target.result;
+    if (firebaseReady) { try{await db.collection('images').add({src,ts:Date.now()});}catch(err){saveImgLocal(src);} }
+    else saveImgLocal(src);
+    loadImages();
+  };
+  reader.readAsDataURL(file);
+}
+function saveImgLocal(src) {
+  const imgs = JSON.parse(localStorage.getItem('imgs')||'[]');
+  imgs.push({src,id:Date.now().toString()});
+  localStorage.setItem('imgs',JSON.stringify(imgs));
+}
+async function loadImages() {
+  const gallery = document.getElementById('gallery');
+  gallery.innerHTML='';
+  let imgs=[];
+  if(firebaseReady){try{const snap=await db.collection('images').get();snap.forEach(d=>imgs.push({src:d.data().src,id:d.id,fb:true}));}catch(e){imgs=JSON.parse(localStorage.getItem('imgs')||'[]');}}
+  else imgs=JSON.parse(localStorage.getItem('imgs')||'[]');
+  imgs.forEach(({src,id,fb})=>{
+    const wrap=document.createElement('div'); wrap.className='gallery-item';
+    const img=document.createElement('img'); img.src=src;
+    const btn=document.createElement('button'); btn.className='gallery-delete'; btn.textContent='×';
+    btn.addEventListener('click',async()=>{
+      if(fb&&firebaseReady){try{await db.collection('images').doc(id).delete();}catch(e){}}
+      else{const l=JSON.parse(localStorage.getItem('imgs')||'[]').filter(i=>i.id!==id);localStorage.setItem('imgs',JSON.stringify(l));}
+      loadImages();
+    });
+    wrap.appendChild(img); wrap.appendChild(btn); gallery.appendChild(wrap);
+  });
+}
+
+// MESSAGES
+async function addMessage() {
+  const val = document.getElementById('msgInput').value.trim();
+  if (!val) return;
+  if(firebaseReady){try{await db.collection('messages').add({text:val,ts:Date.now()});}catch(e){saveMsgLocal(val);}}
+  else saveMsgLocal(val);
+  document.getElementById('msgInput').value='';
+  loadMessages();
+}
+function saveMsgLocal(text) {
+  const msgs=JSON.parse(localStorage.getItem('msgs')||'[]');
+  msgs.push({text,id:Date.now().toString()});
+  localStorage.setItem('msgs',JSON.stringify(msgs));
+}
+async function loadMessages() {
+  const board=document.getElementById('messageBoard'); board.innerHTML='';
+  let msgs=[];
+  if(firebaseReady){try{const snap=await db.collection('messages').orderBy('ts').get();snap.forEach(d=>msgs.push({text:d.data().text,id:d.id,fb:true}));}catch(e){msgs=JSON.parse(localStorage.getItem('msgs')||'[]');}}
+  else msgs=JSON.parse(localStorage.getItem('msgs')||'[]');
+  msgs.forEach(({text,id,fb})=>{
+    const div=document.createElement('div'); div.className='message-card';
+    const span=document.createElement('span'); span.textContent=text;
+    const btn=document.createElement('button'); btn.className='msg-delete'; btn.textContent='×';
+    btn.addEventListener('click',async()=>{
+      if(fb&&firebaseReady){try{await db.collection('messages').doc(id).delete();}catch(e){}}
+      else{const l=JSON.parse(localStorage.getItem('msgs')||'[]').filter(m=>m.id!==id);localStorage.setItem('msgs',JSON.stringify(l));}
+      loadMessages();
+    });
+    div.appendChild(span); div.appendChild(btn); board.appendChild(div);
+  });
+}
+
+// CHAPTERS
+const ch1pages = [
+`I didn't know it then—
+
+that this would be the version of her I'd end up keeping.
+
+Not the last phone call where neither of us said anything.
+
+Not the stupid fights.
+
+Not the months of silence that came after.
+
+Just this.
+
+A video she sent on a Tuesday, maybe Wednesday. We had only been talking for what, three or four days?
+
+Back then, she was just a name in my notifications. Someone I was starting to check for way too often, but I hadn't made her into anything yet. She was still a stranger.
+
+And then she sent it.
+
+No text. No "listen to this." Just a file that took a second too long to load.`,
+
+`I remember staring at the thumbnail for a minute before I tapped it. I had this weird, heavy feeling in my gut— like if I opened it, something was going to change.
+
+I was right.
+
+She was sitting at an old piano, wearing a grey t-shirt that was way too big for her. Her hair was just messy, tied up with a rubber band like she'd done it in two seconds. The room was dark, just one lamp in the corner making everything look yellow and dim.
+
+It didn't look like she was trying to look good.
+
+And for some reason, I couldn't look away.
+
+The camera was tilted a bit. When she leaned forward to reach a note, the collar of her shirt slipped down her shoulder. She didn't even fix it. She didn't even notice. It felt like I was spying on her. Like I was seeing something I shouldn't be allowed to see.
+
+And then she started singing.
+
+It wasn't for me.
+
+That was the first thing I realized.`,
+
+`She wasn't performing. She wasn't looking at the lens or waiting for a like or a comment. She sang like she was the only person left on earth, like she'd forgotten the phone was even recording.
+
+I don't even remember the lyrics.
+
+I just remember how my chest felt.
+
+It was strange— how something so normal, so unpolished, could just start moving things around inside me.
+
+I watched it.
+
+Then I hit replay.
+
+Then again.
+
+And again, just trying to figure out why I felt so different all of a sudden.
+
+Somewhere in those repeats, I stopped looking at the video quality or the room.
+
+I just looked at her.
+
+Not the version of her. Just her.
+
+The way she existed when she thought no one was watching.
+
+The way she didn't ask for my attention, but I couldn't give it to anything else.
+
+It was like a concert with no audience.
+
+The kind that was never supposed to have one.
+
+And somehow, I was the one who got the invite.
+
+That's when it started.
+
+It wasn't a big deal at the time.
+
+It wasn't dramatic.
+
+Just a quiet click—
+
+like a lock turning in a door I didn't even know was there.
+
+I wouldn't have called it love.
+
+I would have laughed if you'd said it.
+
+But if I have to look back now and find the exact second where everything shifted—
+
+it's right here.`
+];
+
+const ch2pages = [
+`There wasn't some big, dramatic crash. No shouting, no "we need to talk," no door slamming in my face. It was just a Tuesday night, and I was staring at a screen that felt like it was pulling something out of me.
+
+One little grey word.
+
+Seen.
+
+It's stupid, isn't it?
+
+How something that small can make your stomach turn like that.
+
+At first, I told myself you were just busy.
+
+Laundry. Shower. Something normal.
+
+Or maybe you just got distracted— the way your brain skips tracks in the middle of a sentence.
+
+That was the whole point of us, right?
+
+We didn't need to hover.
+
+But silence was never completely nothing between us.`,
+
+`Maybe it started earlier.
+
+Something about the way you replied before that…
+
+shorter than usual.
+
+Not wrong. Just… different.
+
+I told myself I was imagining it.
+
+I probably was.
+
+But that night, it wasn't easy.
+
+The room didn't feel quiet.
+
+It felt… wrong.
+
+Like waiting in a room that still looked the same, but somehow wasn't.
+
+I checked my phone more than I want to admit.
+
+Not even expecting a message anymore.
+
+Just checking.
+
+Like something might change if I looked at it enough times.`,
+
+`I told myself I didn't care.
+
+That I was being normal about it.
+
+I wasn't.
+
+I started typing once.
+
+Something casual. Something that didn't sound like I'd been staring at the same screen for too long.
+
+A joke, probably.
+
+The kind you'd reply to with something half-serious, half-teasing… like you always do.
+
+I don't even remember what I wrote.
+
+I just remember my thumb hovering over "send"…
+
+and not pressing it.
+
+Because it suddenly felt like too much.
+
+Like sending another message would say something I hadn't said out loud yet.
+
+Because asking would've made it real.
+
+And I didn't know which answer I was more scared of.
+
+So I didn't.
+
+I just left it there.
+
+Unsent.`,
+
+`I tried doing other things, but everything kept pulling me back to the same place.
+
+The same screen.
+
+The same word.
+
+Seen.
+
+I don't know when I fell asleep.
+
+Just that when I woke up, my hand was already reaching for my phone.
+
+Didn't even think about it.
+
+Just… reached.
+
+And there it was.
+
+Your message.
+
+Something normal. A dream you had. Or something random that only makes sense in your head… and somehow still makes sense to me.
+
+Like nothing had been off.
+
+The relief hit too fast.
+
+Like my body had been holding something in all night and finally let go.
+
+I just lay there for a second, staring at it.
+
+Reading it again.
+
+And again.`,
+
+`But underneath that relief… something didn't sit right.
+
+Because for you, it hadn't been anything.
+
+Just a pause.
+
+The way you disappear sometimes and come back like nothing ever really changed.
+
+For me… it hadn't felt like a pause.
+
+It felt like standing in a space where you were supposed to be… and not knowing what to do when you weren't.
+
+And I think that's when it hit me.
+
+Not all at once.
+
+Just… somewhere in the quiet after.
+
+How much of my own balance
+
+I'd handed over to you without even noticing.`
+];
+
+const ch3pages = [
+`I told her first. I didn't wait for a moment that felt right, because those moments are just places to hide. I just let it out.
+
+"I am madly in love with you."
+
+She said she didn't know that. I'd said I'm in love with you before, but apparently "madly" was a different language.
+
+"Now you know," I said.
+
+Then she said: "fck it's raining."
+
+I wanted to laugh. I'd just handed her something real and the world responded with weather. But that's her. Nothing lands with ceremony.`,
+
+`She was walking to work. I asked about an umbrella. I didn't care about the rain; I just needed somewhere to put my hands. She told me she'd lost hundreds of them. Umbrellas, pens, towels—things she set down and just forgot existed.
+
+I told her she should tie everything to her wrist so she wouldn't lose her life.
+
+"Veryyy good idea," she said. "That's one of the many reasons why I love you."
+
+I didn't let it go. I didn't wait.
+
+"What are the other reasons?" I asked.
+
+Then, she went silent.
+
+She went to work, and for two hours, there was nothing. Just the grey space where my question was sitting. I'd pushed for the list, and then I had to live in the quiet while she decided what the answers were.`,
+
+`Then the message came. I had to scroll to reach the end of it—just my thumb moving and moving against the glass.
+
+She said I make her feel safe from thousands of miles away.
+She said I truly listen.
+She said I make her feel chosen.
+She said I understand her deeply.
+She said I make love feel easy.
+She said I make her feel seen.
+She said I give her something to look forward to.
+She said I make her believe in a warm, safe future.
+
+I read it until the screen went dark.
+
+"I don't know what to say," I typed.
+
+It felt small sitting next to what she'd just given me. I'd asked for the reasons, and she'd gone to work, walked through the rain, and built a cathedral.`,
+
+`She believed in a future because of me. Now. Through a screen. On a Tuesday when she'd already lost her umbrella.
+
+I thought about that for a long time.
+
+I kept the message. I still have it. Not because it's a beautiful memory, but because some part of me already knew.
+
+Somewhere underneath the warmth, there would be a night when I'd need to read those words just to see if I was still real. To see if I was still the man who made her feel safe—
+
+or if I'd been set down somewhere and left behind,
+the way she loses things,
+quietly,
+without noticing when.`
+];
+
+const chPages = {1:ch1pages, 2:ch2pages, 3:ch3pages};
+const chCurrent = {1:0, 2:0, 3:0};
+
+function renderChapter(ch, page) {
+  const pages = chPages[ch];
+  document.getElementById('ch'+ch+'prose').innerHTML = pages[page].split('\n\n').map(p=>'<p>'+p.replace(/\n/g,'<br>')+'</p>').join('');
+  document.getElementById('ch'+ch+'pager').textContent = (page+1)+' / '+pages.length;
+  document.getElementById('ch'+ch+'prev').disabled = page===0;
+  document.getElementById('ch'+ch+'next').disabled = page===pages.length-1;
+  chCurrent[ch] = page;
+}
+
+function openChapter(ch) {
+  document.getElementById('contents-view').style.display='none';
+  document.getElementById('reader-ch1').style.display='none';
+  document.getElementById('reader-ch2').style.display='none';
+  document.getElementById('reader-ch3').style.display='none';
+  document.getElementById('reader-ch'+ch).style.display='block';
+  renderChapter(ch,0);
+}
+function closeChapter(ch) {
+  document.getElementById('reader-ch'+ch).style.display='none';
+  document.getElementById('contents-view').style.display='block';
+}
+
+function setupChapters() {
+  document.getElementById('link-ch1').addEventListener('click',()=>openChapter(1));
+  document.getElementById('link-ch2').addEventListener('click',()=>openChapter(2));
+  document.getElementById('link-ch3').addEventListener('click',()=>openChapter(3));
+  document.getElementById('back-ch1').addEventListener('click',()=>closeChapter(1));
+  document.getElementById('back-ch2').addEventListener('click',()=>closeChapter(2));
+  document.getElementById('back-ch3').addEventListener('click',()=>closeChapter(3));
+  document.getElementById('ch1prev').addEventListener('click',()=>{if(chCurrent[1]>0)renderChapter(1,chCurrent[1]-1);});
+  document.getElementById('ch1next').addEventListener('click',()=>{if(chCurrent[1]<ch1pages.length-1)renderChapter(1,chCurrent[1]+1);});
+  document.getElementById('ch2prev').addEventListener('click',()=>{if(chCurrent[2]>0)renderChapter(2,chCurrent[2]-1);});
+  document.getElementById('ch2next').addEventListener('click',()=>{if(chCurrent[2]<ch2pages.length-1)renderChapter(2,chCurrent[2]+1);});
+  document.getElementById('ch3prev').addEventListener('click',()=>{if(chCurrent[3]>0)renderChapter(3,chCurrent[3]-1);});
+  document.getElementById('ch3next').addEventListener('click',()=>{if(chCurrent[3]<ch3pages.length-1)renderChapter(3,chCurrent[3]+1);});
+}
+
+function setupButtons() {
+  document.getElementById('spinBtn').addEventListener('click',spinWheel);
+  document.getElementById('factBtn').addEventListener('click',showFact);
+  document.getElementById('missBtn').addEventListener('click',missMe);
+  document.getElementById('postBtn').addEventListener('click',addMessage);
+  document.getElementById('imageUpload').addEventListener('change',addImage);
+}
+</script>
+</body>
+</html>
