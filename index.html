@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -431,7 +431,7 @@ textarea:focus { border-color: var(--rose); }
           </div>
           <span style="color:var(--ink-muted);font-size:18px;">→</span>
         </div>
-        <div id="link-ch3" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;cursor:pointer;">
+        <div id="link-ch3" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;border-bottom:1px solid var(--border);cursor:pointer;">
           <div>
             <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">Chapter III</div>
             <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:2px;">the umbrella</div>
@@ -439,6 +439,13 @@ textarea:focus { border-color: var(--rose); }
           <span style="color:var(--ink-muted);font-size:18px;">→</span>
         </div>
       </div>
+        <div id="link-ch4" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;cursor:pointer;">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">Chapter IV</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:2px;">Meanwhile</div>
+          </div>
+          <span style="color:var(--ink-muted);font-size:18px;">→</span>
+        </div>
 
       <div id="reader-ch1" style="display:none;">
         <div id="back-ch1" style="display:flex;align-items:center;gap:0.5rem;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;">
@@ -476,6 +483,18 @@ textarea:focus { border-color: var(--rose); }
           <button id="ch3prev">←</button>
           <span id="ch3pager">1 / 1</span>
           <button id="ch3next">→</button>
+        </div>
+      </div>
+      <div id="reader-ch4" style="display:none;">
+        <div id="back-ch4" style="display:flex;align-items:center;gap:0.5rem;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;">
+          <span style="color:var(--ink-muted);font-size:16px;">←</span>
+          <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);">Back</span>
+        </div>
+        <div class="chapter-prose" id="ch4prose"></div>
+        <div class="chapter-nav">
+          <button id="ch4prev">←</button>
+          <span id="ch4pager">1 / 1</span>
+          <button id="ch4next">→</button>
         </div>
       </div>
 
@@ -998,8 +1017,340 @@ quietly,
 without noticing when.`
 ];
 
-const chPages = {1:ch1pages, 2:ch2pages, 3:ch3pages};
-const chCurrent = {1:0, 2:0, 3:0};
+const ch4pages = [
+`There are some days that don't feel important while you're living them.
+
+No arguments.
+
+No revelations.
+
+No life-changing decisions.
+
+Just a Saturday that arrives, passes, and should have been forgotten.
+
+This was one of those days.
+
+Or at least it should have been.`,
+
+`She had plans with her friends.
+
+I remember that much.
+
+I remember being happy she was going out.
+
+Not because I wanted time to myself.
+
+Just because I liked knowing she had a life outside of me.
+
+A life that existed before I arrived and would continue whether I was there or not.
+
+So I decided I'd make plans too.
+
+One friend was with his girlfriend.
+
+Another was working.
+
+The third didn't answer.
+
+Later I found out he'd travelled to another city to visit his sister.
+
+My flatmate, Mizaan, had left for work before I woke up.
+
+The day slowly became one of those days where every possible plan belonged to someone else.
+
+By afternoon I'd stopped checking my phone every few minutes.
+
+By evening I ordered biryani.
+
+Not because I was craving it.
+
+Because it seemed easier than deciding what else to do.`,
+
+`The apartment was quiet.
+
+Not unusually quiet.
+
+Just quiet enough that you notice every small sound.
+
+The refrigerator humming.
+
+Cars passing outside.
+
+The television speaking to an audience of one.
+
+I put on a movie and let it play.
+
+I don't remember which movie.
+
+Only that it was the kind you choose when you don't particularly care what happens in it.
+
+The delivery arrived halfway through.
+
+I paused the movie and walked into the kitchen.
+
+The plate slipped before I realised it was falling.
+
+The crash was enormous.
+
+Ceramic against tile.
+
+Sharp enough to bounce off the walls and rush down the hallway.
+
+For a second I looked up.
+
+Then stayed still.
+
+Waiting.
+
+The television continued talking to itself in the other room.
+
+Nothing else moved.
+
+I looked down at the broken pieces.
+
+Then around the apartment.
+
+Then back at the broken pieces again.
+
+It struck me how strange it was that a sound could feel lonely.
+
+I sat on the kitchen floor.
+
+Not because I had to.
+
+Just because standing felt difficult for some reason.
+
+The biryani sat untouched on the counter.
+
+Outside, somebody laughed.
+
+A car door slammed.
+
+Life continued with remarkable efficiency.
+
+Inside the apartment, nothing happened at all.`,
+
+`I don't remember how long I sat there.
+
+Long enough for the food to get cold.
+
+Long enough for the movie to become irrelevant.
+
+Long enough to realise I hadn't spoken to another person face-to-face all day.
+
+Not once.
+
+It sounds dramatic written down.
+
+It didn't feel dramatic then.
+
+It just felt true.`,
+
+`Australia had a way of doing that.
+
+Not the loneliness.
+
+The distance.
+
+The way it quietly rearranged your life.
+
+I had friends.
+
+Good friends.
+
+People I'd watch football with.
+
+People I'd grab lunch with.
+
+People I'd call if I needed help.
+
+But every person I knew in Australia knew me as an adult.
+
+The finished version.
+
+Or at least the version pretending to be finished.
+
+Nobody knew the earlier drafts.
+
+Nobody remembered me from school.
+
+Nobody knew what I looked like before I grew into myself.
+
+Nobody remembered stories I'd forgotten telling.
+
+The history existed.
+
+The witnesses didn't.
+
+Most of the time I didn't think about it.
+
+Then every once in a while, usually on days like that one, I'd feel the absence of it.
+
+Not painfully.
+
+Just enough to notice.`,
+
+`By then she had become part of my routine in ways I hadn't fully realised.
+
+Not in grand ways.
+
+Nothing that would have sounded romantic if I said it out loud.
+
+I just found myself checking the time and knowing roughly what she'd be doing.
+
+Whether she'd be awake.
+
+At work.
+
+On her way home.
+
+Whether she'd probably be busy.
+
+Whether there was a chance my phone would light up.
+
+The same way you learn the route home without consciously memorising it.
+
+Repetition becomes familiarity.
+
+Familiarity becomes habit.`,
+
+`Sometimes she would tell me about her day.
+
+Sometimes about work.
+
+Sometimes about absolutely nothing.
+
+The kind of conversations most people forget.
+
+The strange thing is those are usually the conversations I remember.
+
+Not because of what was said.
+
+Because of when they arrived.`,
+
+`I never told her about the plate.
+
+Not properly.
+
+Looking back, I don't think it was because I was hiding anything.
+
+And I don't think it was because she wouldn't have understood.
+
+The truth is simpler.
+
+I wasn't very good at talking about my own loneliness.
+
+Other people's loneliness was easier.
+
+Other people's sadness made sense to me.
+
+My own always felt harder to explain.
+
+So I didn't.
+
+The story stayed where it happened.
+
+In that apartment.
+
+On that kitchen floor.`,
+
+`Eventually I cleaned up the broken pieces.
+
+Put the biryani in the microwave.
+
+Tried to restart the movie.
+
+I don't think I made it more than ten minutes.
+
+The film had lost its audience.`,
+
+`Later that night my phone lit up.
+
+A message from her.
+
+I can't remember exactly what it said.
+
+Something about her day.
+
+Something ordinary.
+
+A small story.
+
+The sort of message people send without realising they'll become part of someone's memory.
+
+I read it.
+
+Then read it again.
+
+Not because it was profound.
+
+Because it wasn't.
+
+That was the point.
+
+There was something comforting about the ordinariness of it.
+
+Someone, somewhere on the other side of the world, had decided to tell me about her day.
+
+And somehow that felt important.`,
+
+`The apartment was still quiet.
+
+The dishes were still waiting in the sink.
+
+The movie was still unfinished.
+
+Nothing had really changed.
+
+Yet the evening felt different than it had an hour earlier.
+
+Not happier.
+
+Not fixed.
+
+Just different.
+
+The way a room feels after someone opens a window.
+
+You can't point to the exact thing that's changed.
+
+You just know the air isn't quite the same anymore.
+
+I replied.
+
+She replied back.
+
+The conversation wandered nowhere in particular.
+
+Then eventually the night ended.
+
+Like all nights do.`,
+
+`The next morning I threw away the broken pieces of the plate.
+
+I don't remember the movie.
+
+I don't remember what happened the following weekend.
+
+I don't even remember the score of the football match I watched a few days later.
+
+What I remember is the sound.
+
+The silence afterwards.
+
+And a message arriving from a country I'd never visited from a person I'd never met.
+
+At the time, it felt like an ordinary conversation.
+
+Nothing more.
+
+Nothing less.
+
+I didn't know then how much space someone could occupy in your life without ever entering the room.`
+];
+
+const chPages = {1:ch1pages, 2:ch2pages, 3:ch3pages, 4:ch4pages};
+const chCurrent = {1:0, 2:0, 3:0, 4:0};
 
 function renderChapter(ch, page) {
   const pages = chPages[ch];
@@ -1015,6 +1366,7 @@ function openChapter(ch) {
   document.getElementById('reader-ch1').style.display='none';
   document.getElementById('reader-ch2').style.display='none';
   document.getElementById('reader-ch3').style.display='none';
+  document.getElementById('reader-ch4').style.display='none';
   document.getElementById('reader-ch'+ch).style.display='block';
   renderChapter(ch,0);
 }
@@ -1027,15 +1379,19 @@ function setupChapters() {
   document.getElementById('link-ch1').addEventListener('click',()=>openChapter(1));
   document.getElementById('link-ch2').addEventListener('click',()=>openChapter(2));
   document.getElementById('link-ch3').addEventListener('click',()=>openChapter(3));
+  document.getElementById('link-ch4').addEventListener('click',()=>openChapter(4));
   document.getElementById('back-ch1').addEventListener('click',()=>closeChapter(1));
   document.getElementById('back-ch2').addEventListener('click',()=>closeChapter(2));
   document.getElementById('back-ch3').addEventListener('click',()=>closeChapter(3));
+  document.getElementById('back-ch4').addEventListener('click',()=>closeChapter(4));
   document.getElementById('ch1prev').addEventListener('click',()=>{if(chCurrent[1]>0)renderChapter(1,chCurrent[1]-1);});
   document.getElementById('ch1next').addEventListener('click',()=>{if(chCurrent[1]<ch1pages.length-1)renderChapter(1,chCurrent[1]+1);});
   document.getElementById('ch2prev').addEventListener('click',()=>{if(chCurrent[2]>0)renderChapter(2,chCurrent[2]-1);});
   document.getElementById('ch2next').addEventListener('click',()=>{if(chCurrent[2]<ch2pages.length-1)renderChapter(2,chCurrent[2]+1);});
   document.getElementById('ch3prev').addEventListener('click',()=>{if(chCurrent[3]>0)renderChapter(3,chCurrent[3]-1);});
   document.getElementById('ch3next').addEventListener('click',()=>{if(chCurrent[3]<ch3pages.length-1)renderChapter(3,chCurrent[3]+1);});
+  document.getElementById('ch4prev').addEventListener('click',()=>{if(chCurrent[4]>0)renderChapter(4,chCurrent[4]-1);});
+  document.getElementById('ch4next').addEventListener('click',()=>{if(chCurrent[4]<ch4pages.length-1)renderChapter(4,chCurrent[4]+1);});
 }
 
 function setupButtons() {
