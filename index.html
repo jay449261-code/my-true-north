@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -438,14 +438,21 @@ textarea:focus { border-color: var(--rose); }
           </div>
           <span style="color:var(--ink-muted);font-size:18px;">→</span>
         </div>
-      </div>
-        <div id="link-ch4" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;cursor:pointer;">
+        <div id="link-ch4" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;border-bottom:1px solid var(--border);cursor:pointer;">
           <div>
             <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">Chapter IV</div>
-            <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:2px;">Meanwhile</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:2px;">444</div>
           </div>
           <span style="color:var(--ink-muted);font-size:18px;">→</span>
         </div>
+        <div id="link-ch5" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;cursor:pointer;">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">Chapter V</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:2px;">meanwhile</div>
+          </div>
+          <span style="color:var(--ink-muted);font-size:18px;">→</span>
+        </div>
+      </div>
 
       <div id="reader-ch1" style="display:none;">
         <div id="back-ch1" style="display:flex;align-items:center;gap:0.5rem;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;">
@@ -485,6 +492,7 @@ textarea:focus { border-color: var(--rose); }
           <button id="ch3next">→</button>
         </div>
       </div>
+
       <div id="reader-ch4" style="display:none;">
         <div id="back-ch4" style="display:flex;align-items:center;gap:0.5rem;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;">
           <span style="color:var(--ink-muted);font-size:16px;">←</span>
@@ -495,6 +503,19 @@ textarea:focus { border-color: var(--rose); }
           <button id="ch4prev">←</button>
           <span id="ch4pager">1 / 1</span>
           <button id="ch4next">→</button>
+        </div>
+      </div>
+
+      <div id="reader-ch5" style="display:none;">
+        <div id="back-ch5" style="display:flex;align-items:center;gap:0.5rem;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;">
+          <span style="color:var(--ink-muted);font-size:16px;">←</span>
+          <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);">Back</span>
+        </div>
+        <div class="chapter-prose" id="ch5prose"></div>
+        <div class="chapter-nav">
+          <button id="ch5prev">←</button>
+          <span id="ch5pager">1 / 1</span>
+          <button id="ch5next">→</button>
         </div>
       </div>
 
@@ -573,6 +594,22 @@ const dailyMessages = [
   "I'm glad I found you.",
   "You are worth every unsent message and every one I did send.",
   "Still you. Always you.",
+  "I love the way you exist.",
+  "You arrived quietly and rearranged everything.",
+  "I save things now because they remind me of you.",
+  "Talking to you is the easiest thing I do.",
+  "You are the reason some songs feel different now.",
+  "I don't need the world to know. I just need you to know.",
+  "Sometimes I reread old conversations just to spend more time with a version of you.",
+  "You make being far away feel like a temporary condition.",
+  "I notice everything about you, even the things you don't think I notice.",
+  "Every time zone feels worth crossing.",
+  "I am better at being me because of you.",
+  "You are the kind of person people write things for.",
+  "I find you in everything, a little bit.",
+  "You are the answer to questions I didn't know I had.",
+  "Whatever this is, I'm grateful for it.",
+  "You fit into my life so naturally I can't remember the shape it had before.",
 ];
 function setDailyMessage() {
   const today = new Date();
@@ -1017,7 +1054,7 @@ quietly,
 without noticing when.`
 ];
 
-const ch4pages = [
+const ch5pages = [
 `There are some days that don't feel important while you're living them.
 
 No arguments.
@@ -1144,9 +1181,11 @@ It sounds dramatic written down.
 
 It didn't feel dramatic then.
 
-It just felt true.`,
+It just felt true.
 
-`Australia had a way of doing that.
+---
+
+Australia had a way of doing that.
 
 Not the loneliness.
 
@@ -1212,9 +1251,11 @@ The same way you learn the route home without consciously memorising it.
 
 Repetition becomes familiarity.
 
-Familiarity becomes habit.`,
+Familiarity becomes habit.
 
-`Sometimes she would tell me about her day.
+---
+
+Sometimes she would tell me about her day.
 
 Sometimes about work.
 
@@ -1252,9 +1293,11 @@ The story stayed where it happened.
 
 In that apartment.
 
-On that kitchen floor.`,
+On that kitchen floor.
 
-`Eventually I cleaned up the broken pieces.
+---
+
+Eventually I cleaned up the broken pieces.
 
 Put the biryani in the microwave.
 
@@ -1324,9 +1367,11 @@ The conversation wandered nowhere in particular.
 
 Then eventually the night ended.
 
-Like all nights do.`,
+Like all nights do.
 
-`The next morning I threw away the broken pieces of the plate.
+---
+
+The next morning I threw away the broken pieces of the plate.
 
 I don't remember the movie.
 
@@ -1349,8 +1394,170 @@ Nothing less.
 I didn't know then how much space someone could occupy in your life without ever entering the room.`
 ];
 
-const chPages = {1:ch1pages, 2:ch2pages, 3:ch3pages, 4:ch4pages};
-const chCurrent = {1:0, 2:0, 3:0, 4:0};
+const ch4pages = [
+`There are exactly 1,440 minutes in a day.
+
+To the world, 4:44 is one of them.
+
+Nothing more than sixty ordinary seconds.
+
+If you had asked me what 444 meant before I met you, I would've answered with complete honesty.
+
+Nothing.
+
+Not a theorem.
+
+Not a lucky number.
+
+Not even my favorite.
+
+Just three identical digits standing beside each other.
+
+The mathematical equivalent of wallpaper.
+
+Present, but rarely noticed.`,
+
+`The first time I saw it, it was quietly sitting in your Instagram bio.
+
+I looked at it the way people look at a comma.
+
+Necessary, perhaps.
+
+Meaningless to me.
+
+I kept scrolling.
+
+Weeks later, somewhere in the middle of an ordinary conversation, you asked,
+
+"Have you ever noticed seeing the same numbers over and over again?"
+
+I hadn't.
+
+You continued,
+
+"Like me. Every time I look at the time, I always see 444."
+
+You called it your angel number.
+
+I remember laughing because I had never heard of angel numbers before.
+
+You talked about life paths and souls and patterns that somehow always seemed to find you.
+
+I listened with the healthy skepticism of someone who trusted equations more than coincidence.`,
+
+`Then you told me what 444 meant.
+
+For better.
+
+For worse.
+
+For always.
+
+I don't remember what we talked about after that.
+
+Funny how memory works.
+
+It throws away entire conversations and keeps one sentence forever.
+
+Nothing about 444 changed.
+
+It still sits exactly where it always has, quietly between 443 and 445.
+
+The clocks didn't slow down.
+
+The universe didn't send signs.
+
+The mathematics remained beautifully indifferent.
+
+The only variable that changed was me.`,
+
+`Now I catch myself looking at clocks I never used to notice.
+
+Airport screens.
+
+Microwaves.
+
+Lock screens.
+
+Cash registers.
+
+Not because I'm searching for proof that the universe is paying attention.
+
+But because once, someone shared something small enough that most people would've forgotten it by dinner.
+
+And I wanted to remember.
+
+I think that's what love quietly does.
+
+It takes things that belong to no one and lets two people borrow them.
+
+A bench.
+
+A song.
+
+A street.
+
+A café.
+
+Three ordinary digits.
+
+None of them become objectively special.
+
+They simply become impossible to experience without thinking of someone else.`,
+
+`Sometimes I wonder how many invisible worlds exist around us.
+
+How many people smile when a certain train passes.
+
+How many still order the same coffee because somebody once liked it.
+
+How many still walk on the left side of the footpath because someone always walked on the right.
+
+How many lives are quietly stitched together by things the rest of us would never notice.
+
+Maybe more than we think.`,
+
+`So if you're reading this and 444 means nothing to you, keep it that way.
+
+Find your own number.
+
+Your own song.
+
+Your own streetlight that turns green at exactly the right moment.
+
+Find the ordinary thing that one day becomes a reason to smile without warning.
+
+Because the greatest love stories are rarely built on extraordinary moments.
+
+They're built on tiny, forgettable details that survive long after the conversations do.`,
+
+`And if you're lucky enough to have someone who hands you something as small as three ordinary digits and says,
+
+"This matters to me,"
+
+hold onto it.
+
+One day you'll wake up and realize it matters to you too.
+
+Not because the universe decided it should.
+
+But because somewhere along the way,
+
+someone quietly chose you,
+
+and left a little piece of themselves in something the rest of the world will never notice.
+
+444.
+
+For better.
+
+For worse.
+
+For always.`
+];
+
+const chPages = {1:ch1pages, 2:ch2pages, 3:ch3pages, 4:ch4pages, 5:ch5pages};
+const chCurrent = {1:0, 2:0, 3:0, 4:0, 5:0};
 
 function renderChapter(ch, page) {
   const pages = chPages[ch];
@@ -1363,10 +1570,7 @@ function renderChapter(ch, page) {
 
 function openChapter(ch) {
   document.getElementById('contents-view').style.display='none';
-  document.getElementById('reader-ch1').style.display='none';
-  document.getElementById('reader-ch2').style.display='none';
-  document.getElementById('reader-ch3').style.display='none';
-  document.getElementById('reader-ch4').style.display='none';
+  [1,2,3,4,5].forEach(n=>document.getElementById('reader-ch'+n).style.display='none');
   document.getElementById('reader-ch'+ch).style.display='block';
   renderChapter(ch,0);
 }
@@ -1376,22 +1580,12 @@ function closeChapter(ch) {
 }
 
 function setupChapters() {
-  document.getElementById('link-ch1').addEventListener('click',()=>openChapter(1));
-  document.getElementById('link-ch2').addEventListener('click',()=>openChapter(2));
-  document.getElementById('link-ch3').addEventListener('click',()=>openChapter(3));
-  document.getElementById('link-ch4').addEventListener('click',()=>openChapter(4));
-  document.getElementById('back-ch1').addEventListener('click',()=>closeChapter(1));
-  document.getElementById('back-ch2').addEventListener('click',()=>closeChapter(2));
-  document.getElementById('back-ch3').addEventListener('click',()=>closeChapter(3));
-  document.getElementById('back-ch4').addEventListener('click',()=>closeChapter(4));
-  document.getElementById('ch1prev').addEventListener('click',()=>{if(chCurrent[1]>0)renderChapter(1,chCurrent[1]-1);});
-  document.getElementById('ch1next').addEventListener('click',()=>{if(chCurrent[1]<ch1pages.length-1)renderChapter(1,chCurrent[1]+1);});
-  document.getElementById('ch2prev').addEventListener('click',()=>{if(chCurrent[2]>0)renderChapter(2,chCurrent[2]-1);});
-  document.getElementById('ch2next').addEventListener('click',()=>{if(chCurrent[2]<ch2pages.length-1)renderChapter(2,chCurrent[2]+1);});
-  document.getElementById('ch3prev').addEventListener('click',()=>{if(chCurrent[3]>0)renderChapter(3,chCurrent[3]-1);});
-  document.getElementById('ch3next').addEventListener('click',()=>{if(chCurrent[3]<ch3pages.length-1)renderChapter(3,chCurrent[3]+1);});
-  document.getElementById('ch4prev').addEventListener('click',()=>{if(chCurrent[4]>0)renderChapter(4,chCurrent[4]-1);});
-  document.getElementById('ch4next').addEventListener('click',()=>{if(chCurrent[4]<ch4pages.length-1)renderChapter(4,chCurrent[4]+1);});
+  [1,2,3,4,5].forEach(ch => {
+    document.getElementById('link-ch'+ch).addEventListener('click',()=>openChapter(ch));
+    document.getElementById('back-ch'+ch).addEventListener('click',()=>closeChapter(ch));
+    document.getElementById('ch'+ch+'prev').addEventListener('click',()=>{if(chCurrent[ch]>0)renderChapter(ch,chCurrent[ch]-1);});
+    document.getElementById('ch'+ch+'next').addEventListener('click',()=>{if(chCurrent[ch]<chPages[ch].length-1)renderChapter(ch,chCurrent[ch]+1);});
+  });
 }
 
 function setupButtons() {
