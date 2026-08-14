@@ -765,6 +765,13 @@ textarea:focus { border-color: var(--rose); }
           </div>
           <span style="color:var(--gold);font-size:18px;">→</span>
         </div>
+        <div id="link-ch7" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;cursor:pointer;">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">Chapter VII</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:2px;">the quiet</div>
+          </div>
+          <span style="color:var(--ink-muted);font-size:18px;">→</span>
+        </div>
       </div>
 
       <div id="reader-ch1" style="display:none;">
@@ -842,6 +849,19 @@ textarea:focus { border-color: var(--rose); }
           <button id="ch6prev">←</button>
           <span id="ch6pager">1 / 1</span>
           <button id="ch6next">→</button>
+        </div>
+      </div>
+
+      <div id="reader-ch7" style="display:none;">
+        <div id="back-ch7" style="display:flex;align-items:center;gap:0.5rem;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;">
+          <span style="color:var(--ink-muted);font-size:16px;">←</span>
+          <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);">Back</span>
+        </div>
+        <div class="chapter-prose" id="ch7prose"></div>
+        <div class="chapter-nav">
+          <button id="ch7prev">←</button>
+          <span id="ch7pager">1 / 1</span>
+          <button id="ch7next">→</button>
         </div>
       </div>
 
@@ -2027,8 +2047,412 @@ Happy one year.
 I love you.`
 ];
 
-const chPages = {1:ch1pages, 2:ch2pages, 3:ch3pages, 4:ch4pages, 5:ch5pages, 6:ch6pages};
-const chCurrent = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0};
+
+// CHAPTER VII – THE QUIET
+const ch7pages = [
+`There was a time when I could tell you were gone by the way my phone stayed still.
+
+Not literally.
+
+The phone didn't know anything.
+
+It didn't know whether you were sleeping.
+
+Whether you were working.
+
+Whether you were tired.
+
+Whether the day had simply become too much.
+
+It only knew that the screen was dark.
+
+I was the one who gave the darkness meaning.`,
+
+`I remember checking sometimes without even realizing I was doing it.
+
+I'd pick up my phone.
+
+Nothing.
+
+Put it down.
+
+A few minutes later, pick it up again.
+
+Still nothing.
+
+There was never anything particularly dramatic about it.
+
+No argument.
+
+No goodbye.
+
+No reason to think something had changed.
+
+Just silence.
+
+And somehow my mind could turn that silence into a thousand different possibilities.
+
+Maybe she's upset.
+
+Maybe she's tired of talking.
+
+Maybe I said something.
+
+Maybe she's pulling away.
+
+Maybe...
+
+I became very good at the word *maybe*.`,
+
+`The strange thing is that I never really wanted to pressure you.
+
+I wanted to be there.
+
+There is a difference, even if I didn't always understand it.
+
+When you were having a difficult day, my first instinct was to move toward you.
+
+Ask.
+
+Check.
+
+Help.
+
+Fix.
+
+I thought love was supposed to be useful.
+
+If something hurt you, I wanted to take some of the hurt away.
+
+If you were overwhelmed, I wanted to make things lighter.
+
+If you were tired, I wanted to find the thing that would make you less tired.
+
+It took me a while to understand that some days don't need another person trying to solve them.
+
+They just need to end.`,
+
+`I think about that now when you go quiet.
+
+Not always successfully.
+
+I still notice.
+
+Of course I do.
+
+I still miss you.
+
+Sometimes I want to tell you something immediately and then remember that maybe you're sleeping.
+
+Sometimes I want to hear your voice and remember that maybe you don't have one more conversation in you.
+
+Sometimes I look at the last message between us and feel that old little pull.
+
+The one that says,
+
+*Say something.*
+
+*Ask.*
+
+*Make sure we're okay.*
+
+It's still there.
+
+I'm just learning not to obey it every time.`,
+
+`There was a night when your phone died.
+
+You were gone for a while.
+
+And when you finally came back, you explained what had happened.
+
+You didn't have to.
+
+That's what stayed with me.
+
+Not the explanation itself.
+
+The fact that, somewhere in the middle of everything you were dealing with, you still thought about how your silence might make me feel.
+
+You came back and told me.
+
+And I remember thinking that perhaps I had been watching the wrong thing.
+
+I had been watching the silence.
+
+You had been thinking about me inside it.
+
+There was something strangely comforting about that.
+
+Not because I needed an explanation.
+
+Because I didn't.
+
+Because somewhere between the message I hadn't received and the one that eventually arrived, you were still you.
+
+Still caring.
+
+Still there.
+
+Just tired.`,
+
+`You can be unavailable without being absent.
+
+I think I needed to learn that.
+
+Distance makes you count things you never used to count.
+
+Minutes since the last message.
+
+Hours between calls.
+
+Days until the next good conversation.
+
+We look at numbers because numbers feel certain.
+
+But love has never been particularly good at being measured.`,
+
+`I've also started realizing that your exhaustion isn't something I want you to feel guilty about.
+
+I don't want you to be having the worst day of your week, barely holding yourself together, and then see my name on your screen and think,
+
+*I should answer him.*
+
+I don't want loving me to become another task on a list.
+
+Another thing you have to complete before you're allowed to rest.
+
+I don't want to be another weight.
+
+I want to be somewhere you can put the weight down.
+
+That matters to me now.
+
+Maybe more than I know how to explain.`,
+
+`There are days when I still fail at it.
+
+I'll wonder.
+
+I'll worry.
+
+I'll miss you more than usual.
+
+Sometimes I'll have the urge to send another message just because I want to feel the connection again.
+
+And then I stop.
+
+Not because I suddenly don't care.
+
+Because I do.
+
+I think about what your day might have taken from you.
+
+How little energy a person can have left after spending the whole day simply trying to get through it.
+
+And I remind myself:
+
+*She doesn't need to prove anything to me tonight.*
+
+So I put the phone down.
+
+Sometimes I actually manage to leave it there.
+
+That's progress.
+
+Small, unimpressive progress.
+
+But progress.`,
+
+`I used to think giving someone space meant moving away.
+
+Now I think it can mean staying exactly where you are without asking them to come closer.
+
+It can mean saying,
+
+*Take your time.*
+
+And actually meaning it.
+
+It can mean letting someone have a bad day without turning it into a bad day for the relationship.
+
+It can mean trusting that the quiet isn't an ending.
+
+It's just quiet.
+
+And I think about the kind of home I want us to have someday.
+
+Not the house.
+
+Not the city.
+
+Not the room.
+
+The feeling.
+
+I want there to be a kind of silence between us that doesn't frighten either of us.
+
+A silence where you can sit on one side of the room and I can sit on the other and neither of us feels the need to fill it.
+
+A place where being tired doesn't require an apology.
+
+Where saying *I don't have much today* is enough.
+
+Where you don't have to arrive with a smile just because you love me.
+
+Where you can have nothing to give and still know you're loved.`,
+
+`I don't know if I'll ever become completely comfortable with distance.
+
+I hope I don't.
+
+I think a part of me will always wish I could simply walk over to you when you're having a difficult day.
+
+Sit beside you.
+
+Bring you something.
+
+Say nothing.
+
+Maybe that's the cruelest part of loving someone from far away.
+
+You can know exactly what you'd do if you were there.
+
+And still be here.
+
+But perhaps there is something I can do from here.
+
+I can make sure you never have to run toward me just to prove you still want me.
+
+I can let you come when you have the strength.
+
+I can keep the light on without standing at the window.`,
+
+`I think that's the part I didn't understand before.
+
+I thought waiting meant watching.
+
+Watching the phone.
+
+Watching the clock.
+
+Watching for the little sign that everything was okay.
+
+Now I'm trying to make waiting something quieter.
+
+Living my day.
+
+Doing my things.
+
+Letting you have yours.
+
+Knowing that if you need me, I'm here.
+
+And if you don't need me for a little while,
+
+I'm still here.`,
+
+`So if you ever have one of those days again,
+
+the kind that takes everything out of you,
+
+you don't have to worry about me sitting here wondering whether you've stopped loving me.
+
+You don't have to find the energy to reassure me.
+
+You don't have to explain every hour that passed.
+
+You don't have to turn your exhaustion into an apology.
+
+Rest.
+
+Sleep.
+
+Be quiet.
+
+Let the world wait.
+
+I'll understand.
+
+And if I miss you,
+
+I'll carry that myself.
+
+Because missing you isn't something you have to fix.
+
+It's just one of the things that comes with loving you.`,
+
+`You stop asking,
+
+*How do I make sure she never leaves?*
+
+And start asking,
+
+*How do I make sure she always feels safe coming back?*
+
+I think I know my answer now.
+
+I don't chase you through the quiet.
+
+I don't turn your silence into a question.
+
+I don't ask you to carry my fear on top of everything else you're already carrying.
+
+I leave the door open.
+
+That's all.
+
+The rest is yours.`,
+
+`And maybe one day, when we're finally in the same place, I'll remember these nights.
+
+The dark screen.
+
+The unanswered messages.
+
+The hours that once felt so much longer than they really were.
+
+I'll remember how hard it was to learn that silence could mean nothing at all.
+
+And you'll be there.
+
+Maybe sitting beside me.
+
+Maybe tired.
+
+Maybe scrolling through your phone.
+
+Maybe not saying anything.
+
+And I'll know.
+
+Nothing is wrong.
+
+Nothing needs fixing.
+
+You are simply quiet.
+
+And I will be quiet with you.
+
+Until you feel like speaking again.
+
+Until the world feels manageable again.
+
+Until you look over at me.
+
+You won't have to give me anything.
+
+Just know that you never have to.
+
+Because I don't want to be another thing you have to carry.
+
+I want to be the place where you can finally put everything down.
+
+And breathe.`
+];
+
+const chPages = {1:ch1pages, 2:ch2pages, 3:ch3pages, 4:ch4pages, 5:ch5pages, 6:ch6pages, 7:ch7pages};
+const chCurrent = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0};
 
 function renderChapter(ch, page) {
   const pages = chPages[ch];
@@ -2041,7 +2465,7 @@ function renderChapter(ch, page) {
 
 function openChapter(ch) {
   document.getElementById('contents-view').style.display='none';
-  [1,2,3,4,5,6].forEach(n=>document.getElementById('reader-ch'+n).style.display='none');
+  [1,2,3,4,5,6,7].forEach(n=>document.getElementById('reader-ch'+n).style.display='none');
   document.getElementById('reader-ch'+ch).style.display='block';
   renderChapter(ch,0);
 }
@@ -2051,7 +2475,7 @@ function closeChapter(ch) {
 }
 
 function setupChapters() {
-  [1,2,3,4,5,6].forEach(ch => {
+  [1,2,3,4,5,6,7].forEach(ch => {
     document.getElementById('link-ch'+ch).addEventListener('click',()=>openChapter(ch));
     document.getElementById('back-ch'+ch).addEventListener('click',()=>closeChapter(ch));
     document.getElementById('ch'+ch+'prev').addEventListener('click',()=>{if(chCurrent[ch]>0)renderChapter(ch,chCurrent[ch]-1);});
