@@ -1,0 +1,2887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="theme-color" content="#87ceeb">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Baby</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #f3f9fe;
+  --warm: #dff0fb;
+  --ink: #0f2233;
+  --ink-soft: #34506a;
+  --ink-muted: #6a869f;
+  --rose: #4aa3df;
+  --border: rgba(15,34,51,0.12);
+  --gold: #2f89c9;
+  --rose-gold: #8ecff0;
+  --gold-glow: rgba(74,163,223, 0.35);
+}
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+  font-weight: 300;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.5;
+}
+.hidden { display: none !important; }
+#loginPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.login-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 2.5rem;
+}
+.login-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 8vw, 4.5rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.1;
+  text-align: center;
+  color: var(--ink);
+  margin-bottom: 3rem;
+  max-width: 420px;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 300px;
+}
+.login-form input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+.login-form input::placeholder { color: var(--ink-muted); }
+.login-form input:focus { border-bottom-color: var(--rose); }
+.btn-primary {
+  margin-top: 1rem;
+  background: var(--ink);
+  color: var(--cream);
+  border: none;
+  padding: 0.9rem 2rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.15s;
+  border-radius: 2px;
+}
+.btn-primary:hover { background: var(--rose); transform: translateY(-1px); }
+.login-hint {
+  margin-top: 2rem;
+  font-size: 12px;
+  color: var(--ink-muted);
+  font-style: italic;
+}
+#mainPage {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 1.25rem 4rem;
+}
+.site-header {
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+}
+.site-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.counter-block { text-align: right; }
+.counter-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--ink);
+}
+.counter-label {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 4px;
+}
+.site-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 6vw, 3rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.1;
+  color: var(--ink);
+}
+.site-subtitle { font-size: 13px; color: var(--ink-muted); margin-top: 0.4rem; }
+.section {
+  margin-bottom: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  animation: fadeIn 0.4s ease both;
+}
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 1.25rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+.section-header:hover { background: var(--warm); }
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ink);
+  margin-top: 2px;
+}
+.section-toggle { font-size: 20px; color: var(--ink-muted); line-height: 1; }
+.section-body {
+  display: none;
+  padding: 0 1.25rem 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.section-body.open { display: block; }
+
+.anniversary-banner {
+  position: relative;
+  text-align: center;
+  padding: 2.2rem 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 6px;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(135,206,235,0.28) 0 4px, transparent 5px),
+    radial-gradient(circle at 85% 30%, rgba(74,163,223,0.35) 0 5px, transparent 6px),
+    radial-gradient(circle at 70% 85%, rgba(135,206,235,0.25) 0 4px, transparent 5px),
+    radial-gradient(circle at 25% 80%, rgba(142,207,240,0.4) 0 5px, transparent 6px),
+    linear-gradient(135deg, #eef8ff 0%, #d9eefb 45%, #c6e5f7 100%);
+  border: 1px solid rgba(135,206,235, 0.4);
+  overflow: hidden;
+  animation: fadeIn 0.6s ease both;
+}
+.anniversary-banner::before {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 50% 50%, var(--gold-glow), transparent 60%);
+  animation: annivGlow 4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes annivGlow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.08); }
+}
+.anniversary-eyebrow {
+  position: relative;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+.anniversary-title {
+  position: relative;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.9rem, 6vw, 2.6rem);
+  font-style: italic;
+  font-weight: 300;
+  color: #1f5f8f;
+  text-shadow: 0 0 18px var(--gold-glow);
+}
+.anniversary-sub {
+  position: relative;
+  margin-top: 0.5rem;
+  font-size: 12.5px;
+  color: #3f7fae;
+  letter-spacing: 0.04em;
+}
+
+.memory-vault {
+  position: relative;
+  margin-bottom: 2rem;
+  border-radius: 6px;
+  border: 1px solid rgba(74,163,223, 0.35);
+  background: linear-gradient(160deg, #f7fcff, #e6f4fc);
+  overflow: hidden;
+  animation: fadeIn 0.6s ease 0.1s both;
+}
+.vault-closed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  padding: 2.2rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+.vault-closed:hover { background: rgba(74,163,223, 0.08); }
+.vault-icon {
+  font-size: 1.8rem;
+  color: var(--gold);
+  transition: transform 0.4s ease;
+}
+.vault-closed:hover .vault-icon { transform: translateY(-2px) rotate(-4deg); }
+.vault-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  color: #1f5f8f;
+}
+.vault-hint {
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6aa5cc;
+}
+.vault-message {
+  display: none;
+  padding: 0 1.5rem 2rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--ink);
+  text-align: center;
+  animation: fadeIn 0.7s ease both;
+}
+.vault-message.open { display: block; }
+.vault-message p { margin-bottom: 1rem; }
+.vault-message p:last-child { margin-bottom: 0; }
+.vault-signature {
+  margin-top: 1rem;
+  font-size: 12px;
+  font-style: normal;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+}
+
+.timeline-wrap {
+  position: relative;
+  padding: 1.5rem 0 0.5rem;
+}
+.timeline-item {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-left: 1px solid var(--border);
+}
+.timeline-item::before {
+  content: '✦';
+  position: absolute;
+  left: -6px;
+  top: 0;
+  font-size: 10px;
+  color: var(--rose);
+  background: var(--cream);
+}
+.timeline-date {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.timeline-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--ink);
+  margin: 2px 0 4px;
+}
+.timeline-text {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.clock-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 1.5rem 0;
+  text-align: center;
+}
+.clock-box {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--warm);
+}
+.clock-label {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 6px;
+}
+.clock-time {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--ink);
+}
+
+.jar-wrap {
+  text-align: center;
+  padding: 1.5rem 0;
+}
+.jar-icon {
+  font-size: 2.5rem;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+.jar-icon:hover { transform: scale(1.1) rotate(5deg); }
+.jar-note {
+  margin-top: 1rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--rose);
+  min-height: 3rem;
+  line-height: 1.5;
+}
+
+.message-display {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--ink);
+  padding: 1.5rem 0 0.5rem;
+}
+.message-date { font-size: 11px; color: var(--ink-muted); letter-spacing: 0.1em; }
+.wheel-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 0;
+  gap: 1rem;
+}
+.wheel-container { position: relative; width: 260px; height: 260px; }
+.wheel-pointer {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-top: 18px solid var(--rose);
+  z-index: 10;
+}
+#wheelCanvas { width: 260px; height: 260px; border-radius: 50%; }
+.wheel-result {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--rose);
+  min-height: 1.5rem;
+  text-align: center;
+}
+.fact-display {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--ink);
+  padding: 1.2rem 0;
+  min-height: 3rem;
+}
+.miss-display {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  color: var(--rose);
+  padding: 1rem 0;
+  min-height: 2.5rem;
+}
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 1rem 0; }
+.gallery-item { position: relative; aspect-ratio: 1; overflow: hidden; border-radius: 3px; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gallery-delete {
+  position: absolute; top: 6px; right: 6px;
+  background: rgba(15,34,51,0.7); color: white;
+  border: none; border-radius: 50%;
+  width: 24px; height: 24px; font-size: 14px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.2s;
+}
+.gallery-item:hover .gallery-delete { opacity: 1; }
+.upload-label {
+  display: inline-block;
+  font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-muted); border: 1px solid var(--border);
+  padding: 0.6rem 1.2rem; border-radius: 2px; cursor: pointer;
+  transition: all 0.2s; margin: 0.75rem 0;
+}
+.upload-label:hover { border-color: var(--rose); color: var(--rose); }
+#imageUpload { display: none; }
+.msg-input-wrap { margin-top: 1rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+.msg-input-label {
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 0.5rem; display: block;
+}
+textarea {
+  width: 100%; border: 1px solid var(--border); background: transparent;
+  padding: 0.75rem; font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 300; color: var(--ink);
+  outline: none; resize: vertical; min-height: 80px;
+  border-radius: 2px; transition: border-color 0.3s;
+}
+textarea:focus { border-color: var(--rose); }
+.message-card {
+  border: 1px solid var(--border); border-radius: 3px;
+  padding: 0.9rem 1rem; margin-top: 0.6rem;
+  font-size: 14px; line-height: 1.6; color: var(--ink-soft);
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem;
+}
+.msg-delete {
+  background: none; border: none; color: var(--ink-muted);
+  cursor: pointer; font-size: 16px; line-height: 1;
+  flex-shrink: 0; padding: 0; transition: color 0.2s;
+}
+.msg-delete:hover { color: var(--rose); }
+.btn-soft {
+  background: transparent; border: 1px solid var(--border);
+  color: var(--ink-soft); padding: 0.6rem 1.2rem;
+  font-family: 'DM Sans', sans-serif; font-size: 12px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; border-radius: 2px; transition: all 0.2s; margin-top: 0.75rem;
+}
+.btn-soft:hover { border-color: var(--rose); color: var(--rose); }
+.chapter-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 1.25rem; border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--ink-muted); letter-spacing: 0.1em;
+}
+.chapter-nav button {
+  background: none; border: none; color: var(--ink-muted);
+  cursor: pointer; font-size: 18px; padding: 0 0.5rem; transition: color 0.2s;
+}
+.chapter-nav button:hover { color: var(--rose); }
+.chapter-nav button:disabled { opacity: 0.25; cursor: default; }
+.chapter-prose {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; font-weight: 300; line-height: 2;
+  color: var(--ink); padding: 2rem 1.25rem 1rem;
+}
+.chapter-prose p { margin-bottom: 1.4rem; }
+.chapter-prose p:last-child { margin-bottom: 0; }
+.celebration-particle {
+  position: fixed;
+  bottom: -20px;
+  pointer-events: none;
+  z-index: 500;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: floatUp linear forwards;
+}
+@keyframes floatUp {
+  0% { opacity: 0; transform: translateY(0) translateX(0) rotate(0deg); }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.8; }
+  100% { opacity: 0; transform: translateY(-105vh) translateX(var(--drift, 20px)) rotate(25deg); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- TULIPS ---- */
+.tulip-row { display:flex; justify-content:center; align-items:flex-end; gap:6px; margin-bottom:1.6rem; }
+.tulip-row svg { width:26px; height:58px; transform-origin:50% 100%; animation: sway 4s ease-in-out infinite; }
+.tulip-row svg:nth-child(2n) { animation-delay:-1.3s; }
+.tulip-row svg:nth-child(3n) { animation-delay:-2.4s; }
+.header-tulips { margin:1.2rem 0 0; justify-content:flex-start; margin-bottom:0; }
+.header-tulips svg { width:22px; height:50px; }
+@keyframes sway { 0%,100%{transform:rotate(-3deg);} 50%{transform:rotate(3deg);} }
+.tulip-garden {
+  display:flex; flex-wrap:wrap; justify-content:center; align-items:flex-end; gap:2px;
+  min-height:120px; padding:1.2rem 0.6rem 0.4rem; border-radius:6px;
+  background: linear-gradient(180deg, #e8f5fd 0%, #cfeaf9 70%, #b9dcc0 70.5%, #a7cfae 100%);
+}
+.tulip-garden svg { width:34px; height:76px; transform-origin:50% 100%; animation: bloom 0.8s cubic-bezier(.2,.9,.3,1.2) both, sway 5s ease-in-out 0.8s infinite; }
+@keyframes bloom { from{ transform:scale(0.1); opacity:0; } to{ transform:scale(1); opacity:1; } }
+.tulip-note { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.25rem; line-height:1.55; padding:1rem 0 0.2rem; min-height:3rem; color:var(--ink); }
+
+/* ---- FAVOURITES ---- */
+.fav-chips { display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem; }
+.fav-chip {
+  background:transparent; border:1px solid var(--border); color:var(--ink-soft);
+  padding:0.5rem 0.9rem; border-radius:999px; cursor:pointer;
+  font-family:'DM Sans',sans-serif; font-size:12px; letter-spacing:0.04em; transition:all 0.2s;
+}
+.fav-chip:hover { border-color:var(--rose); color:var(--rose); }
+.fav-chip.active { background:var(--rose); border-color:var(--rose); color:#fff; }
+.fav-title { margin-top:1rem; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); }
+.fav-note { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-style:italic; line-height:1.6; color:var(--ink); padding:0.6rem 0 0.2rem; min-height:4rem; animation: fadeIn 0.5s ease both; }
+@media (prefers-reduced-motion: reduce) { .tulip-row svg, .tulip-garden svg { animation:none; } }
+</style>
+</head>
+<body>
+
+<div id="loginPage">
+  <div class="tulip-row" id="loginTulips" aria-hidden="true"></div>
+  <p class="login-eyebrow">a birthday made for you 🌷</p>
+  <h1 class="login-title">come in,<br>it's your day</h1>
+  <div class="login-form">
+    <input id="username" placeholder="who are you?" autocomplete="off">
+    <input id="password" type="password" placeholder="our password">
+    <button class="btn-primary" id="enterBtn">Enter</button>
+  </div>
+  <p class="login-hint">you know the words · October 7</p>
+</div>
+
+<div id="mainPage" class="hidden">
+  <header class="site-header">
+    <div class="site-header-top">
+      <div>
+        <h1 class="site-title">happy birthday,<br>Baby 🎂</h1>
+        <p class="site-subtitle">a small world i built, just for today</p>
+      </div>
+      <div class="counter-block">
+        <div class="counter-number" id="dayCount">—</div>
+        <div class="counter-label">days</div>
+      </div>
+    </div>
+    <div class="tulip-row header-tulips" id="headerTulips" aria-hidden="true"></div>
+  </header>
+
+  <div class="anniversary-banner" id="anniversaryBanner" style="display:none;">
+    <div class="anniversary-eyebrow">🌷 Birthday Edition 🌷</div>
+    <div class="anniversary-title">Happy Birthday, Baby</div>
+    <div class="anniversary-sub" id="anniversarySub"></div>
+  </div>
+
+  <div class="memory-vault" id="memoryVault" style="display:none;">
+    <div class="vault-closed" id="vaultClosed">
+      <div class="vault-icon">✉</div>
+      <div class="vault-label">a birthday message, sealed for today</div>
+      <div class="vault-hint">tap to open</div>
+    </div>
+    <div class="vault-message" id="vaultMessage">
+      <p>Happy birthday, Baby.</p>
+      <p>Somewhere a little girl was born who had no idea how much she'd carry, or how many people she'd quietly hold up along the way.</p>
+      <p>I'm glad she did. I'm glad you did.</p>
+      <p>There's a chapter waiting for you below, in "memories i look back at." Chapter IX. Take your time with it.</p>
+      <div class="vault-signature">— always, me · 444</div>
+    </div>
+  </div>
+
+  <div class="section" style="animation-delay:0.03s">
+    <div class="section-header" id="hdr-clock">
+      <div><div class="section-label">Across The Distance</div><div class="section-title">Our timezones</div></div>
+      <span class="section-toggle" id="tog-clock">+</span>
+    </div>
+    <div class="section-body" id="body-clock">
+      <div class="clock-container">
+        <div class="clock-box">
+          <div class="clock-label">Where I Am</div>
+          <div class="clock-time" id="myTime">--:--</div>
+        </div>
+        <div class="clock-box">
+          <div class="clock-label">Where You Are (PH)</div>
+          <div class="clock-time" id="herTime">--:--</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="animation-delay:0.05s">
+    <div class="section-header" id="hdr-msg">
+      <div><div class="section-label">Today</div><div class="section-title">Daily message</div></div>
+      <span class="section-toggle" id="tog-msg">+</span>
+    </div>
+    <div class="section-body" id="body-msg">
+      <div class="message-display" id="dailyMessage">—</div>
+      <div class="message-date" id="msgDate"></div>
+    </div>
+  </div>
+
+  <!-- MILESTONES SECTION -->
+  <div class="section" style="animation-delay:0.08s">
+    <div class="section-header" id="hdr-timeline">
+      <div><div class="section-label">The Year Behind Us</div><div class="section-title">Milestones</div></div>
+      <span class="section-toggle" id="tog-timeline">+</span>
+    </div>
+    <div class="section-body" id="body-timeline">
+      <div class="timeline-wrap">
+        <div class="timeline-item">
+          <div class="timeline-date">The Foundation</div>
+          <div class="timeline-title">Built at 4:00 AM</div>
+          <div class="timeline-text">If you told me a year ago that waking up before the sun—when the rest of the world is dead quiet and pitch black outside—would become my absolute favorite part of the day, I’d have thought you were out of your mind. But that’s the thing about this past year. It wasn't made of grand, sweeping movie moments. It was built at 4:00 AM.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Every Morning</div>
+          <div class="timeline-title">The Quiet Haze</div>
+          <div class="timeline-text">It was built in that half-asleep haze, reaching for the phone just to hear your voice, to see your smile, and to watch you head off into your day while I sat in the quiet of mine.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Across The Miles</div>
+          <div class="timeline-title">Our Sanctuary</div>
+          <div class="timeline-text">We’ve spent three hundred and sixty-five days figuring out how to belong to each other across the miles. We built our own little sanctuary out of shared playlists, late-night songs played at the piano, digital pages of stories we wrote together, and a thousand tiny running jokes that make zero sense to anyone else on earth. We learned each other's rhythms—when to laugh, when to listen, and how to make a screen feel like a warm, crowded room.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Day 365</div>
+          <div class="timeline-title">Proof & Intention</div>
+          <div class="timeline-text">Reaching a year together isn't just a number on a calendar for us. It’s proof. Proof that distance is just geography when two people are this intentional about choosing each other every single day. It’s the pride of looking at everything we’ve grown through, every routine we’ve built, and every personal milestone we’ve cheered each other on for.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Looking Forward</div>
+          <div class="timeline-title">My Favorite Plot Twist</div>
+          <div class="timeline-text">A year in, and you still feel like my favorite plot twist. I love who we are, I love what we’ve built, and I can’t wait for every single morning that comes next.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="animation-delay:0.12s">
+    <div class="section-header" id="hdr-jar">
+      <div><div class="section-label">Surprise</div><div class="section-title">The gratitude jar</div></div>
+      <span class="section-toggle" id="tog-jar">+</span>
+    </div>
+    <div class="section-body" id="body-jar">
+      <div class="jar-wrap">
+        <div class="jar-icon" id="jarBtn">🏺</div>
+        <p style="font-size:11px; color:var(--ink-muted); letter-spacing:0.1em; text-transform:uppercase; margin-top:4px;">Tap the jar to pull a note</p>
+        <div class="jar-note" id="jarNote">"Click to open a little message..."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="animation-delay:0.13s">
+    <div class="section-header" id="hdr-fav">
+      <div><div class="section-label">Things you love</div><div class="section-title">Your little universe</div></div>
+      <span class="section-toggle" id="tog-fav">+</span>
+    </div>
+    <div class="section-body" id="body-fav">
+      <div class="fav-chips" id="favChips">
+        <button class="fav-chip active" data-cat="friends">☕ Friends</button>
+        <button class="fav-chip" data-cat="sparks">💌 Nicholas Sparks</button>
+        <button class="fav-chip" data-cat="mentalist">🫖 The Mentalist</button>
+        <button class="fav-chip" data-cat="robin">🎭 Robin Williams</button>
+      </div>
+      <div class="fav-title" id="favTitle"></div>
+      <div class="fav-note" id="favNote"></div>
+      <button class="btn-soft" id="favBtn">Another one</button>
+    </div>
+  </div>
+
+  <div class="section" style="animation-delay:0.14s">
+    <div class="section-header" id="hdr-tulip">
+      <div><div class="section-label">Your favourite flower</div><div class="section-title">Plant a tulip</div></div>
+      <span class="section-toggle" id="tog-tulip">+</span>
+    </div>
+    <div class="section-body" id="body-tulip">
+      <div class="tulip-garden" id="tulipGarden"></div>
+      <div class="tulip-note" id="tulipNote">tap below, and I'll plant you another</div>
+      <button class="btn-soft" id="tulipBtn">Plant a tulip 🌷</button>
+    </div>
+  </div>
+
+  <div class="section" style="animation-delay:0.15s">
+    <div class="section-header" id="hdr-wheel">
+      <div><div class="section-label">For us</div><div class="section-title">Spin the wheel</div></div>
+      <span class="section-toggle" id="tog-wheel">+</span>
+    </div>
+    <div class="section-body" id="body-wheel">
+      <div class="wheel-wrap">
+        <div class="wheel-container">
+          <div class="wheel-pointer"></div>
+          <canvas id="wheelCanvas" width="260" height="260"></canvas>
+        </div>
+        <button class="btn-soft" id="spinBtn">Spin</button>
+        <div class="wheel-result" id="wheelResult"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="animation-delay:0.18s">
+    <div class="section-header" id="hdr-fact">
+      <div><div class="section-label">About me</div><div class="section-title">Something true</div></div>
+      <span class="section-toggle" id="tog-fact">+</span>
+    </div>
+    <div class="section-body" id="body-fact">
+      <div class="fact-display" id="factText">—</div>
+      <button class="btn-soft" id="factBtn">Another one</button>
+    </div>
+  </div>
+
+  <div class="section" style="animation-delay:0.2s">
+    <div class="section-header" id="hdr-miss">
+      <div><div class="section-label">Just wondering</div><div class="section-title">Miss me?</div></div>
+      <span class="section-toggle" id="tog-miss">+</span>
+    </div>
+    <div class="section-body" id="body-miss">
+      <div class="miss-display" id="missText">—</div>
+      <button class="btn-soft" id="missBtn">Click if yes</button>
+    </div>
+  </div>
+
+  <div class="section" style="animation-delay:0.22s">
+    <div class="section-header" id="hdr-moments">
+      <div><div class="section-label">Us</div><div class="section-title">Moments</div></div>
+      <span class="section-toggle" id="tog-moments">+</span>
+    </div>
+    <div class="section-body" id="body-moments">
+      <div class="gallery-grid" id="gallery"></div>
+      <label class="upload-label" for="imageUpload">+ Add photo</label>
+      <input type="file" id="imageUpload" accept="image/*">
+      <div class="msg-input-wrap">
+        <span class="msg-input-label">Leave a note</span>
+        <textarea id="msgInput" placeholder="write something..."></textarea>
+        <button class="btn-soft" id="postBtn">Post</button>
+        <div id="messageBoard"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="animation-delay:0.25s">
+    <div class="section-header" id="hdr-memories">
+      <div><div class="section-label">Writing</div><div class="section-title">memories i look back at</div></div>
+      <span class="section-toggle" id="tog-memories">+</span>
+    </div>
+    <div class="section-body" id="body-memories" style="padding:0;">
+
+      <div id="contents-view" style="padding:1.25rem;">
+        <p style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:1rem;">Contents</p>
+        <div id="link-ch1" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;border-bottom:1px solid var(--border);cursor:pointer;">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">Chapter I</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:2px;">the piano video</div>
+          </div>
+          <span style="color:var(--ink-muted);font-size:18px;">→</span>
+        </div>
+        <div id="link-ch2" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;border-bottom:1px solid var(--border);cursor:pointer;">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">Chapter II</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:2px;">seen</div>
+          </div>
+          <span style="color:var(--ink-muted);font-size:18px;">→</span>
+        </div>
+        <div id="link-ch3" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;border-bottom:1px solid var(--border);cursor:pointer;">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">Chapter III</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:2px;">the umbrella</div>
+          </div>
+          <span style="color:var(--ink-muted);font-size:18px;">→</span>
+        </div>
+        <div id="link-ch4" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;border-bottom:1px solid var(--border);cursor:pointer;">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">Chapter IV</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:2px;">444</div>
+          </div>
+          <span style="color:var(--ink-muted);font-size:18px;">→</span>
+        </div>
+        <div id="link-ch5" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;border-bottom:1px solid var(--border);cursor:pointer;">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">Chapter V</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:2px;">meanwhile</div>
+          </div>
+          <span style="color:var(--ink-muted);font-size:18px;">→</span>
+        </div>
+        <div id="link-ch6" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;cursor:pointer;">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);">Chapter VI (Anniversary)</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:2px;">365 days</div>
+          </div>
+          <span style="color:var(--gold);font-size:18px;">→</span>
+        </div>
+        <div id="link-ch7" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;border-bottom:1px solid var(--border);cursor:pointer;">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">Chapter VII</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:2px;">the quiet</div>
+          </div>
+          <span style="color:var(--ink-muted);font-size:18px;">→</span>
+        </div>
+        <div id="link-ch9" style="display:flex;justify-content:space-between;align-items:center;padding:0.85rem 0;cursor:pointer;">
+          <div>
+            <div style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);">Chapter IX (Birthday)</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;font-weight:300;color:var(--ink);margin-top:2px;">October 7</div>
+          </div>
+          <span style="color:var(--gold);font-size:18px;">→</span>
+        </div>
+      </div>
+
+      <div id="reader-ch1" style="display:none;">
+        <div id="back-ch1" style="display:flex;align-items:center;gap:0.5rem;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;">
+          <span style="color:var(--ink-muted);font-size:16px;">←</span>
+          <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);">Back</span>
+        </div>
+        <div class="chapter-prose" id="ch1prose"></div>
+        <div class="chapter-nav">
+          <button id="ch1prev">←</button>
+          <span id="ch1pager">1 / 1</span>
+          <button id="ch1next">→</button>
+        </div>
+      </div>
+
+      <div id="reader-ch2" style="display:none;">
+        <div id="back-ch2" style="display:flex;align-items:center;gap:0.5rem;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;">
+          <span style="color:var(--ink-muted);font-size:16px;">←</span>
+          <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);">Back</span>
+        </div>
+        <div class="chapter-prose" id="ch2prose"></div>
+        <div class="chapter-nav">
+          <button id="ch2prev">←</button>
+          <span id="ch2pager">1 / 1</span>
+          <button id="ch2next">→</button>
+        </div>
+      </div>
+
+      <div id="reader-ch3" style="display:none;">
+        <div id="back-ch3" style="display:flex;align-items:center;gap:0.5rem;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;">
+          <span style="color:var(--ink-muted);font-size:16px;">←</span>
+          <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);">Back</span>
+        </div>
+        <div class="chapter-prose" id="ch3prose"></div>
+        <div class="chapter-nav">
+          <button id="ch3prev">←</button>
+          <span id="ch3pager">1 / 1</span>
+          <button id="ch3next">→</button>
+        </div>
+      </div>
+
+      <div id="reader-ch4" style="display:none;">
+        <div id="back-ch4" style="display:flex;align-items:center;gap:0.5rem;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;">
+          <span style="color:var(--ink-muted);font-size:16px;">←</span>
+          <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);">Back</span>
+        </div>
+        <div class="chapter-prose" id="ch4prose"></div>
+        <div class="chapter-nav">
+          <button id="ch4prev">←</button>
+          <span id="ch4pager">1 / 1</span>
+          <button id="ch4next">→</button>
+        </div>
+      </div>
+
+      <div id="reader-ch5" style="display:none;">
+        <div id="back-ch5" style="display:flex;align-items:center;gap:0.5rem;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;">
+          <span style="color:var(--ink-muted);font-size:16px;">←</span>
+          <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);">Back</span>
+        </div>
+        <div class="chapter-prose" id="ch5prose"></div>
+        <div class="chapter-nav">
+          <button id="ch5prev">←</button>
+          <span id="ch5pager">1 / 1</span>
+          <button id="ch5next">→</button>
+        </div>
+      </div>
+
+      <div id="reader-ch6" style="display:none;">
+        <div id="back-ch6" style="display:flex;align-items:center;gap:0.5rem;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;">
+          <span style="color:var(--ink-muted);font-size:16px;">←</span>
+          <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);">Back</span>
+        </div>
+        <div class="chapter-prose" id="ch6prose"></div>
+        <div class="chapter-nav">
+          <button id="ch6prev">←</button>
+          <span id="ch6pager">1 / 1</span>
+          <button id="ch6next">→</button>
+        </div>
+      </div>
+
+      <div id="reader-ch7" style="display:none;">
+        <div id="back-ch7" style="display:flex;align-items:center;gap:0.5rem;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;">
+          <span style="color:var(--ink-muted);font-size:16px;">←</span>
+          <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);">Back</span>
+        </div>
+        <div class="chapter-prose" id="ch7prose"></div>
+        <div class="chapter-nav">
+          <button id="ch7prev">←</button>
+          <span id="ch7pager">1 / 1</span>
+          <button id="ch7next">→</button>
+        </div>
+      </div>
+
+      <div id="reader-ch9" style="display:none;">
+        <div id="back-ch9" style="display:flex;align-items:center;gap:0.5rem;padding:0.9rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;">
+          <span style="color:var(--ink-muted);font-size:16px;">←</span>
+          <span style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);">Back</span>
+        </div>
+        <div class="chapter-prose" id="ch9prose"></div>
+        <div class="chapter-nav">
+          <button id="ch9prev">←</button>
+          <span id="ch9pager">1 / 1</span>
+          <button id="ch9next">→</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDNRuDhGAi7iAXL4KzAOuZ4TGS7gWn-K-U",
+  authDomain: "my-true-north.firebaseapp.com",
+  projectId: "my-true-north",
+  storageBucket: "my-true-north.firebasestorage.app",
+  messagingSenderId: "635641816039",
+  appId: "1:635641816039:web:51bb2bcb23cf648a599342"
+};
+
+let db, firebaseReady = false;
+try {
+  const app = firebase.apps.length ? firebase.apps[0] : firebase.initializeApp(firebaseConfig);
+  db = app.firestore();
+  firebaseReady = true;
+} catch(e) { console.warn('Firebase failed, using localStorage', e); }
+
+document.getElementById('enterBtn').addEventListener('click', login);
+document.getElementById('password').addEventListener('keypress', function(e){ if(e.key==='Enter') login(); });
+
+function login() {
+  document.getElementById('loginPage').classList.add('hidden');
+  document.getElementById('mainPage').classList.remove('hidden');
+  init();
+}
+
+function init() {
+  setDayCounter();
+  setDailyMessage();
+  drawWheel();
+  loadImages();
+  loadMessages();
+  setupSections();
+  setupButtons();
+  setupChapters();
+  setupAnniversary();
+  startClocks();
+  setupLoveJar();
+  renderTulipRow('headerTulips', 7);
+  setupFavs();
+  setupTulips();
+}
+
+// GET PHILIPPINES DATE OBJECT (UTC+8)
+function getPhilippinesDate() {
+  const now = new Date();
+  const phString = now.toLocaleString("en-US", {timeZone: "Asia/Manila"});
+  return new Date(phString);
+}
+
+// DAY COUNTER
+const START_DATE = new Date('2025-07-31');
+function setDayCounter() {
+  const phNow = getPhilippinesDate();
+  document.getElementById('dayCount').textContent = Math.floor((phNow - START_DATE) / 86400000);
+}
+
+// DUAL TIMEZONES CLOCK (PH TIME ON RIGHT)
+function startClocks() {
+  function update() {
+    const now = new Date();
+    document.getElementById('myTime').textContent = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    
+    const phTimeStr = now.toLocaleTimeString([], {timeZone: "Asia/Manila", hour: '2-digit', minute:'2-digit'});
+    document.getElementById('herTime').textContent = phTimeStr;
+  }
+  update();
+  setInterval(update, 1000);
+}
+
+// LOVE JAR
+const jarNotes = [
+  "I'd plant a whole field of tulips if it meant you'd stay on the call five more minutes.",
+  "I keep wanting to send you the funny parts of every old comfort show I rewatch.",
+  "I love the way your voice sounds first thing in the morning.",
+  "You make the long distance feel like a temporary detail.",
+  "Wish for something small today. Then something big. You're allowed both.",
+  "Thank you for being my constant throughout this entire year.",
+  "I still remember the piano video like I watched it yesterday.",
+  "You are worth every hour of time difference.",
+  "Even on quiet days, knowing you exist makes everything better.",
+  "Happy birthday. Of all the days, this is the one I'm most grateful for."
+];
+function setupLoveJar() {
+  document.getElementById('jarBtn').addEventListener('click', () => {
+    const note = jarNotes[Math.floor(Math.random() * jarNotes.length)];
+    document.getElementById('jarNote').textContent = `"${note}"`;
+  });
+}
+
+// DAILY MESSAGES (UPDATES AT 12 AM PHILIPPINES TIME)
+const dailyMessages = [
+  "If our life were a sitcom, this would be the episode where nobody leaves.",
+  "You read people better than any TV detective, and you're kinder about it.",
+  "Somewhere there's a field of tulips with your name on it. I'm saving us a spot.",
+  "Some love stories are tragic on purpose. Ours I'd rather keep ordinary, long, and a little ridiculous.",
+  "You make my whole day better just by existing.",
+  "I miss you a little extra today.",
+  "You are my favourite notification.",
+  "I think about you more than I probably should.",
+  "Being known by you feels like the best thing.",
+  "You calm something in me I didn't know was loud.",
+  "Today I caught myself smiling because of you. Again.",
+  "You are my favourite habit.",
+  "I don't know how to explain you to people, but I don't want to stop trying.",
+  "Some days the best part is just knowing you're there.",
+  "You make the ordinary feel different.",
+  "I'm glad I found you.",
+  "You are worth every unsent message and every one I did send.",
+  "Still you. Always you.",
+  "I love the way you exist.",
+  "You arrived quietly and rearranged everything.",
+  "I save things now because they remind me of you.",
+  "Talking to you is the easiest thing I do.",
+  "You are the reason some songs feel different now.",
+  "I don't need the world to know. I just need you to know.",
+  "Sometimes I reread old conversations just to spend more time with a version of you.",
+  "You make being far away feel like a temporary condition.",
+  "I notice everything about you, even the things you don't think I notice.",
+  "Every time zone feels worth crossing.",
+  "I am better at being me because of you.",
+  "You are the kind of person people write things for.",
+  "I find you in everything, a little bit.",
+  "You are the answer to questions I didn't know I had.",
+  "Whatever this is, I'm grateful for it.",
+  "You fit into my life so naturally I can't remember the shape it had before."
+];
+const birthdayMessage = "Happy birthday, Baby. Today the whole world gets to be glad you were born, and I get to say it first.";
+function setDailyMessage() {
+  const phToday = getPhilippinesDate();
+  const startOfYear = new Date(phToday.getFullYear(), 0, 0);
+  const day = Math.floor((phToday - startOfYear) / 86400000);
+  
+  const isBirthday = phToday.getMonth() === 9 && phToday.getDate() === 7;
+  document.getElementById('dailyMessage').textContent = isBirthday ? birthdayMessage : dailyMessages[day % dailyMessages.length];
+  document.getElementById('msgDate').textContent = phToday.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}) + " (PH Time)";
+}
+
+// BIRTHDAY (banner + sealed message always show; confetti once per visit)
+function setupAnniversary() {
+  const banner = document.getElementById('anniversaryBanner');
+  const vault = document.getElementById('memoryVault');
+  banner.style.display = 'block';
+  vault.style.display = 'block';
+
+  const ph = getPhilippinesDate();
+  const isBirthday = ph.getMonth() === 9 && ph.getDate() === 7;
+  document.getElementById('anniversarySub').textContent = isBirthday ? 'October 7 · today' : 'October 7';
+
+  document.getElementById('vaultClosed').addEventListener('click', openVault);
+
+  if (!sessionStorage.getItem('bdayCelebrated')) {
+    spawnCelebration();
+    sessionStorage.setItem('bdayCelebrated', '1');
+  }
+}
+
+function openVault() {
+  const msg = document.getElementById('vaultMessage');
+  const closed = document.getElementById('vaultClosed');
+  msg.classList.add('open');
+  closed.style.display = 'none';
+}
+
+function spawnCelebration() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const shapes = ['🌷', '🎈', '🌷', '✦', '♥', '🎉', '🌷', '🎂'];
+  const colors = ['#4aa3df', '#2f89c9', '#8ecff0'];
+  const total = 30;
+  for (let i = 0; i < total; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'celebration-particle';
+      el.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+      const size = 12 + Math.random() * 14;
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.fontSize = size + 'px';
+      el.style.color = colors[Math.floor(Math.random() * colors.length)];
+      el.style.setProperty('--drift', (Math.random() * 80 - 40) + 'px');
+      el.style.animationDuration = (6 + Math.random() * 4) + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 11000);
+    }, i * 180);
+  }
+}
+
+// ---------- TULIPS ----------
+const tulipPalette = [['#f48fb1','#ec6c97'],['#fff4f7','#f3c6d4'],['#ffd54f','#f5b800'],['#b39ddb','#8e72c7'],['#ff8a80','#f2605a'],['#f8bbd0','#f06292'],['#ffb74d','#f48c1a']];
+function tulipSVG(colors) {
+  const c = colors || tulipPalette[Math.floor(Math.random()*tulipPalette.length)];
+  return '<svg viewBox="0 0 40 90" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M20 88 C20 70 20 56 20 42" stroke="#5fae6b" stroke-width="3" fill="none" stroke-linecap="round"/>' +
+    '<path d="M20 84 C8 76 5 60 9 50 C16 56 20 68 20 84Z" fill="#6bbf78"/>' +
+    '<path d="M20 80 C31 73 35 60 31 52 C25 58 20 68 20 80Z" fill="#58a866"/>' +
+    '<path d="M10 22 C9 34 14 43 20 44 C16 36 14 28 10 22Z" fill="'+c[0]+'"/>' +
+    '<path d="M30 22 C31 34 26 43 20 44 C24 36 26 28 30 22Z" fill="'+c[0]+'"/>' +
+    '<path d="M20 12 C13 22 13 35 20 45 C27 35 27 22 20 12Z" fill="'+c[1]+'"/>' +
+    '</svg>';
+}
+function renderTulipRow(id, n) {
+  const el = document.getElementById(id); if (!el) return;
+  el.innerHTML = Array.from({length:n}, (_,i)=>tulipSVG(tulipPalette[i % tulipPalette.length])).join('');
+}
+const tulipNotes = [
+  "Tulips don't try to be roses. I love that about them, and about you.",
+  "A tulip is a quiet flower. It doesn't shout, it just turns up and makes the whole table look softer.",
+  "For the girl who has been carrying a lot: here is something that asks nothing of you.",
+  "Pink, white, yellow, purple. I'd get you every colour if I could carry the whole field.",
+  "Somewhere, a field of these is blooming right now. Someday I'd like to stand in one with you.",
+  "Every tulip here is a small thank you for being born.",
+  "You don't have to bloom on anyone's schedule. Not even spring's.",
+  "Happy birthday, Baby. This one's for your laugh."
+];
+let tulipCount = 0;
+function plantTulip(withNote) {
+  const g = document.getElementById('tulipGarden'); if (!g) return;
+  g.insertAdjacentHTML('beforeend', tulipSVG());
+  const el = g.lastElementChild;
+  el.style.height = (60 + Math.random()*30) + 'px';
+  el.style.marginLeft = (Math.random()*8-4) + 'px';
+  el.style.animationDelay = '0s, ' + (-Math.random()*3) + 's';
+  while (g.children.length > 36) g.removeChild(g.firstElementChild);
+  if (withNote) document.getElementById('tulipNote').textContent = tulipNotes[tulipCount++ % tulipNotes.length];
+}
+function setupTulips() {
+  for (let i=0;i<6;i++) plantTulip(false);
+  document.getElementById('tulipBtn').addEventListener('click', () => plantTulip(true));
+}
+
+// ---------- YOUR LITTLE UNIVERSE ----------
+const favData = {
+  friends: { title: "Friends", notes: [
+    "If our life were a sitcom, the late-night calls would be the running gag and your laugh would be the one track I'd never mute.",
+    "Every good episode is called 'The One Where…'. Ours would be 'The One Where Neither Of Them Hung Up'.",
+    "Fine, I'll say it: I was never on a break from you.",
+    "Somewhere there's a Central Perk with our two seats saved. Until then, we have a screen and an episode on in the background.",
+    "They say you only get one lobster. I won't make a crustacean joke on your birthday. (I just did.)",
+    "Could I BE any more glad you were born? Honestly, yes. Ask me again tomorrow."
+  ]},
+  sparks: { title: "Nicholas Sparks", notes: [
+    "The Notebook has letters and promises. We have 4:44 a.m. voice notes. Same ink, different paper.",
+    "A Walk to Remember taught people that the ones who change you aren't always the ones you expect. You did that to me, quietly, from the other side of a screen.",
+    "Message in a Bottle: long-distance love has always been a tradition. Mine just arrives with a delivery notification.",
+    "Dear John waited on letters across an ocean. I get to wait for your 'hey', and it's still the best part of my day.",
+    "The Last Song isn't finished until someone's there to hear it. I still think about the piano.",
+    "Safe Haven isn't a place. Some days it's just a person who doesn't make you explain."
+  ]},
+  mentalist: { title: "The Mentalist", notes: [
+    "Patrick Jane read rooms in seconds. I don't need tricks to read you. I just pay attention, and that's the whole secret.",
+    "Everything is a clue: the quiet, the laugh, the 'I'm fine'. I've learned them all, no hypnosis required.",
+    "A cup of tea, a calm voice, and someone who sees straight through the act. That's the comfort of being truly seen.",
+    "Jane and Lisbon took years and a lot of tea to say what everyone already knew. We're bad at timing too, at least we're bad at it together.",
+    "I can't read minds. But I know that when you say 'I'm tired', sometimes it means 'be quiet with me'.",
+    "Mentalists pretend to know the future. I just hope you're in mine."
+  ]},
+  robin: { title: "Robin Williams", notes: [
+    "Good Will Hunting: a bench, a long talk, and someone finally telling a person it isn't all their fault. If nobody's said it lately, it isn't all yours either.",
+    "Dead Poets Society says carpe diem. Seize the day, Baby, and then seize a nap. You've earned both.",
+    "Mrs. Doubtfire made a costume change look hard. Anyone who works nights and raises two kids has done harder, and with less applause.",
+    "Aladdin's Genie gave three wishes. I'd spend mine on sleep, less worry about money, and the same room as you.",
+    "Patch Adams believed laughter was medicine. Yours is the best prescription I've ever been given.",
+    "Hook: Peter forgot how to play and then remembered. You deserve a day where you remember too.",
+    "Jumanji: whatever the board throws at us, I'm in for the whole game."
+  ]}
+};
+let favCat = 'friends', favIdx = {friends:-1, sparks:-1, mentalist:-1, robin:-1};
+function showFav() {
+  const d = favData[favCat];
+  favIdx[favCat] = (favIdx[favCat] + 1) % d.notes.length;
+  document.getElementById('favTitle').textContent = d.title;
+  const note = document.getElementById('favNote');
+  note.style.animation = 'none'; void note.offsetWidth; note.style.animation = '';
+  note.textContent = d.notes[favIdx[favCat]];
+}
+function setupFavs() {
+  document.querySelectorAll('#favChips .fav-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#favChips .fav-chip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      favCat = btn.dataset.cat;
+      showFav();
+    });
+  });
+  document.getElementById('favBtn').addEventListener('click', showFav);
+  showFav();
+}
+// login screen tulips (runs at load)
+renderTulipRow('loginTulips', 9);
+
+
+// SECTIONS
+function setupSections() {
+  ['msg','wheel','fact','miss','moments','memories','timeline','clock','jar','fav','tulip'].forEach(id => {
+    const hdr = document.getElementById('hdr-'+id);
+    if (!hdr) return;
+    hdr.addEventListener('click', () => {
+      const body = document.getElementById('body-'+id);
+      const tog = document.getElementById('tog-'+id);
+      const open = body.classList.toggle('open');
+      tog.textContent = open ? '×' : '+';
+      if (id === 'wheel' && open) drawWheel();
+    });
+  });
+}
+
+// WHEEL
+const wheelOptions = ["Make a birthday wish. Out loud.","Pick a Friends episode.","Pick a Robin Williams movie for tonight.","Selfie. Right now.","Tell me something you haven't said.","Pick what we watch tonight.","Say what you miss about me.","Voice note. Go.","One compliment. Make it count."];
+const wheelColors = ['#cfeaf9','#bfe1f6','#aed8f3','#9ccfee','#8ac5e8','#7abbe2','#6ab0da','#5ca6d2','#4f9bc8'];
+let wheelAngle = 0, spinning = false;
+
+function drawWheel(deg) {
+  deg = deg || 0;
+  const canvas = document.getElementById('wheelCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const cx=130, cy=130, r=128, arc=(2*Math.PI)/wheelOptions.length;
+  ctx.clearRect(0,0,260,260);
+  for (let i=0; i<wheelOptions.length; i++) {
+    const s = arc*i + deg*Math.PI/180, e = arc*(i+1) + deg*Math.PI/180;
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,r,s,e);
+    ctx.fillStyle=wheelColors[i]; ctx.fill();
+    ctx.strokeStyle='#f3f9fe'; ctx.lineWidth=1.5; ctx.stroke();
+    ctx.save(); ctx.translate(cx,cy); ctx.rotate(s+arc/2);
+    ctx.textAlign='right'; ctx.fillStyle='#0f2233'; ctx.font='500 11px DM Sans';
+    const words=wheelOptions[i].split(' '); let line='', y=-4;
+    words.forEach(w => {
+      if((line+w).length>12){ctx.fillText(line.trim(),r-10,y);line=w+' ';y+=14;}
+      else line+=w+' ';
+    });
+    ctx.fillText(line.trim(),r-10,y); ctx.restore();
+  }
+  ctx.beginPath(); ctx.arc(cx,cy,14,0,2*Math.PI);
+  ctx.fillStyle='#f3f9fe'; ctx.fill();
+  ctx.strokeStyle='#0f2233'; ctx.lineWidth=1; ctx.stroke();
+}
+
+function spinWheel() {
+  if (spinning) return;
+  spinning = true;
+  document.getElementById('wheelResult').textContent = '';
+  const amount = 1440 + Math.floor(Math.random()*720);
+  const from = wheelAngle, start = performance.now(), dur = 4000;
+  function ease(t){return 1-Math.pow(1-t,4);}
+  function frame(now) {
+    const t = Math.min((now-start)/dur,1);
+    drawWheel(from + amount*ease(t));
+    if(t<1){requestAnimationFrame(frame);return;}
+    wheelAngle = (from+amount)%360;
+    spinning = false;
+    const idx = Math.floor(((360-wheelAngle%360)%360)/(360/wheelOptions.length))%wheelOptions.length;
+    document.getElementById('wheelResult').textContent = wheelOptions[idx];
+  }
+  requestAnimationFrame(frame);
+}
+
+// FACTS
+const facts = ["I'd choose a Friends rerun over most things, as long as you're watching it too.","I notice tulips everywhere now. This is your fault.","I think about you more than I let on.","You calm me down without trying.","You're my favourite habit.","I notice when you're quiet.","You make ordinary things feel different.","I'm still figuring out how to say most of this.","You are the thing I don't want to overthink.","I keep things because they remind me of you."];
+let lastFact = -1;
+function showFact() {
+  let idx; do{idx=Math.floor(Math.random()*facts.length);}while(idx===lastFact);
+  lastFact=idx; document.getElementById('factText').textContent=facts[idx];
+}
+
+// MISS ME
+const missReplies = ["Of course you do.","I know.","Good.","I miss you too. More than you think.","Obviously."];
+let missIdx = 0;
+function missMe() { document.getElementById('missText').textContent=missReplies[missIdx++%missReplies.length]; }
+
+// IMAGES
+function addImage() {
+  const file = document.getElementById('imageUpload').files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    const src = e.target.result;
+    if (firebaseReady) { try{await db.collection('images').add({src,ts:Date.now()});}catch(err){saveImgLocal(src);} }
+    else saveImgLocal(src);
+    loadImages();
+  };
+  reader.readAsDataURL(file);
+}
+function saveImgLocal(src) {
+  const imgs = JSON.parse(localStorage.getItem('imgs')||'[]');
+  imgs.push({src,id:Date.now().toString()});
+  localStorage.setItem('imgs',JSON.stringify(imgs));
+}
+async function loadImages() {
+  const gallery = document.getElementById('gallery');
+  gallery.innerHTML='';
+  let imgs=[];
+  if(firebaseReady){try{const snap=await db.collection('images').get();snap.forEach(d=>imgs.push({src:d.data().src,id:d.id,fb:true}));}catch(e){imgs=JSON.parse(localStorage.getItem('imgs')||'[]');}}
+  else imgs=JSON.parse(localStorage.getItem('imgs')||'[]');
+  imgs.forEach(({src,id,fb})=>{
+    const wrap=document.createElement('div'); wrap.className='gallery-item';
+    const img=document.createElement('img'); img.src=src;
+    const btn=document.createElement('button'); btn.className='gallery-delete'; btn.textContent='×';
+    btn.addEventListener('click',async()=>{
+      if(fb&&firebaseReady){try{await db.collection('images').doc(id).delete();}catch(e){}}
+      else{const l=JSON.parse(localStorage.getItem('imgs')||'[]').filter(i=>i.id!==id);localStorage.setItem('imgs',JSON.stringify(l));}
+      loadImages();
+    });
+    wrap.appendChild(img); wrap.appendChild(btn); gallery.appendChild(wrap);
+  });
+}
+
+// MESSAGES
+async function addMessage() {
+  const val = document.getElementById('msgInput').value.trim();
+  if (!val) return;
+  if(firebaseReady){try{await db.collection('messages').add({text:val,ts:Date.now()});}catch(e){saveMsgLocal(val);}}
+  else saveMsgLocal(val);
+  document.getElementById('msgInput').value='';
+  loadMessages();
+}
+function saveMsgLocal(text) {
+  const msgs=JSON.parse(localStorage.getItem('msgs')||'[]');
+  msgs.push({text,id:Date.now().toString()});
+  localStorage.setItem('msgs',JSON.stringify(msgs));
+}
+async function loadMessages() {
+  const board=document.getElementById('messageBoard'); board.innerHTML='';
+  let msgs=[];
+  if(firebaseReady){try{const snap=await db.collection('messages').orderBy('ts').get();snap.forEach(d=>msgs.push({text:d.data().text,id:d.id,fb:true}));}catch(e){msgs=JSON.parse(localStorage.getItem('msgs')||'[]');}}
+  else msgs=JSON.parse(localStorage.getItem('msgs')||'[]');
+  msgs.forEach(({text,id,fb})=>{
+    const div=document.createElement('div'); div.className='message-card';
+    const span=document.createElement('span'); span.textContent=text;
+    const btn=document.createElement('button'); btn.className='msg-delete'; btn.textContent='×';
+    btn.addEventListener('click',async()=>{
+      if(fb&&firebaseReady){try{await db.collection('messages').doc(id).delete();}catch(e){}}
+      else{const l=JSON.parse(localStorage.getItem('msgs')||'[]').filter(m=>m.id!==id);localStorage.setItem('msgs',JSON.stringify(l));}
+      loadMessages();
+    });
+    div.appendChild(span); div.appendChild(btn); board.appendChild(div);
+  });
+}
+
+// CHAPTERS 1 TO 5
+const ch1pages = [
+`I didn't know it then—
+
+that this would be the version of her I'd end up keeping.
+
+Not the last phone call where neither of us said anything.
+
+Not the stupid fights.
+
+Not the months of silence that came after.
+
+Just this.
+
+A video she sent on a Tuesday, maybe Wednesday. We had only been talking for what, three or four days?
+
+Back then, she was just a name in my notifications. Someone I was starting to check for way too often, but I hadn't made her into anything yet. She was still a stranger.
+
+And then she sent it.
+
+No text. No "listen to this." Just a file that took a second too long to load.`,
+
+`I remember staring at the thumbnail for a minute before I tapped it. I had this weird, heavy feeling in my gut— like if I opened it, something was going to change.
+
+I was right.
+
+She was sitting at an old piano, wearing a grey t-shirt that was way too big for her. Her hair was just messy, tied up with a rubber band like she'd done it in two seconds. The room was dark, just one lamp in the corner making everything look yellow and dim.
+
+It didn't look like she was trying to look good.
+
+And for some reason, I couldn't look away.
+
+The camera was tilted a bit. When she leaned forward to reach a note, the collar of her shirt slipped down her shoulder. She didn't even fix it. She didn't even notice. It felt like I was spying on her. Like I was seeing something I shouldn't be allowed to see.
+
+And then she started singing.
+
+It wasn't for me.
+
+That was the first thing I realized.`,
+
+`She wasn't performing. She wasn't looking at the lens or waiting for a like or a comment. She sang like she was the only person left on earth, like she'd forgotten the phone was even recording.
+
+I don't even remember the lyrics.
+
+I just remember how my chest felt.
+
+It was strange— how something so normal, so unpolished, could just start moving things around inside me.
+
+I watched it.
+
+Then I hit replay.
+
+Then again.
+
+And again, just trying to figure out why I felt so different all of a sudden.
+
+Somewhere in those repeats, I stopped looking at the video quality or the room.
+
+I just looked at her.
+
+Not the version of her. Just her.
+
+The way she existed when she thought no one was watching.
+
+The way she didn't ask for my attention, but I couldn't give it to anything else.
+
+It was like a concert with no audience.
+
+The kind that was never supposed to have one.
+
+And somehow, I was the one who got the invite.
+
+That's when it started.
+
+It wasn't a big deal at the time.
+
+It wasn't dramatic.
+
+Just a quiet click—
+
+like a lock turning in a door I didn't even know was there.
+
+I wouldn't have called it love.
+
+I would have laughed if you'd said it.
+
+But if I have to look back now and find the exact second where everything shifted—
+
+it's right here.`
+];
+
+const ch2pages = [
+`There wasn't some big, dramatic crash. No shouting, no "we need to talk," no door slamming in my face. It was just a Tuesday night, and I was staring at a screen that felt like it was pulling something out of me.
+
+One little grey word.
+
+Seen.
+
+It's stupid, isn't it?
+
+How something that small can make your stomach turn like that.
+
+At first, I told myself you were just busy.
+
+Laundry. Shower. Something normal.
+
+Or maybe you just got distracted— the way your brain skips tracks in the middle of a sentence.
+
+That was the whole point of us, right?
+
+We didn't need to hover.
+
+But silence was never completely nothing between us.`,
+
+`Maybe it started earlier.
+
+Something about the way you replied before that…
+
+shorter than usual.
+
+Not wrong. Just… different.
+
+I told myself I was imagining it.
+
+I probably was.
+
+But that night, it wasn't easy.
+
+The room didn't feel quiet.
+
+It felt… wrong.
+
+Like waiting in a room that still looked the same, but somehow wasn't.
+
+I checked my phone more than I want to admit.
+
+Not even expecting a message anymore.
+
+Just checking.
+
+Like something might change if I looked at it enough times.`,
+
+`I told myself I didn't care.
+
+That I was being normal about it.
+
+I wasn't.
+
+I started typing once.
+
+Something casual. Something that didn't sound like I'd been staring at the same screen for too long.
+
+A joke, probably.
+
+The kind you'd reply to with something half-serious, half-teasing… like you always do.
+
+I don't even remember what I wrote.
+
+I just remember my thumb hovering over "send"…
+
+and not pressing it.
+
+Because it suddenly felt like too much.
+
+Like sending another message would say something I hadn't said out loud yet.
+
+Because asking would've made it real.
+
+And I didn't know which answer I was more scared of.
+
+So I didn't.
+
+I just left it there.
+
+Unsent.`,
+
+`I tried doing other things, but everything kept pulling me back to the same place.
+
+The same screen.
+
+The same word.
+
+Seen.
+
+I don't know when I fell asleep.
+
+Just that when I woke up, my hand was already reaching for my phone.
+
+Didn't even think about it.
+
+Just… reached.
+
+And there it was.
+
+Your message.
+
+Something normal. A dream you had. Or something random that only makes sense in your head… and somehow still makes sense to me.
+
+Like nothing had been off.
+
+The relief hit too fast.
+
+Like my body had been holding something in all night and finally let go.
+
+I just lay there for a second, staring at it.
+
+Reading it again.
+
+And again.`,
+
+`But underneath that relief… something didn't sit right.
+
+Because for you, it hadn't been anything.
+
+Just a pause.
+
+The way you disappear sometimes and come back like nothing ever really changed.
+
+For me… it hadn't felt like a pause.
+
+It felt like standing in a space where you were supposed to be… and not knowing what to do when you weren't.
+
+And I think that's when it hit me.
+
+Not all at once.
+
+Just… somewhere in the quiet after.
+
+How much of my own balance
+
+I'd handed over to you without even noticing.`
+];
+
+const ch3pages = [
+`I told her first. I didn't wait for a moment that felt right, because those moments are just places to hide. I just let it out.
+
+"I am madly in love with you."
+
+She said she didn't know that. I'd said I'm in love with you before, but apparently "madly" was a different language.
+
+"Now you know," I said.
+
+Then she said: "fck it's raining."
+
+I wanted to laugh. I'd just handed her something real and the world responded with weather. But that's her. Nothing lands with ceremony.`,
+
+`She was walking to work. I asked about an umbrella. I didn't care about the rain; I just needed somewhere to put my hands. She told me she'd lost hundreds of them. Umbrellas, pens, towels—things she set down and just forgot existed.
+
+I told her she should tie everything to her wrist so she wouldn't lose her life.
+
+"Veryyy good idea," she said. "That's one of the many reasons why I love you."
+
+I didn't let it go. I didn't wait.
+
+"What are the other reasons?" I asked.
+
+Then, she went silent.
+
+She went to work, and for two hours, there was nothing. Just the grey space where my question was sitting. I'd pushed for the list, and then I had to live in the quiet while she decided what the answers were.`,
+
+`Then the message came. I had to scroll to reach the end of it—just my thumb moving and moving against the glass.
+
+She said I make her feel safe from thousands of miles away.
+She said I truly listen.
+She said I make her feel chosen.
+She said I understand her deeply.
+She said I make love feel easy.
+She said I make her feel seen.
+She said I give her something to look forward to.
+She said I make her believe in a warm, safe future.
+
+I read it until the screen went dark.
+
+"I don't know what to say," I typed.
+
+It felt small sitting next to what she'd just given me. I'd asked for the reasons, and she'd gone to work, walked through the rain, and built a cathedral.`,
+
+`She believed in a future because of me. Now. Through a screen. On a Tuesday when she'd already lost her umbrella.
+
+I thought about that for a long time.
+
+I kept the message. I still have it. Not because it's a beautiful memory, but because some part of me already knew.
+
+Somewhere underneath the warmth, there would be a night when I'd need to read those words just to see if I was still real. To see if I was still the man who made her feel safe—
+
+or if I'd been set down somewhere and left behind,
+the way she loses things,
+quietly,
+without noticing when.`
+];
+
+const ch4pages = [
+`There are exactly 1,440 minutes in a day.
+
+To the world, 4:44 is one of them.
+
+Nothing more than sixty ordinary seconds.
+
+If you had asked me what 444 meant before I met you, I would've answered with complete honesty.
+
+Nothing.
+
+Not a theorem.
+
+Not a lucky number.
+
+Not even my favorite.
+
+Just three identical digits standing beside each other.
+
+The mathematical equivalent of wallpaper.
+
+Present, but rarely noticed.`,
+
+`The first time I saw it, it was quietly sitting in your Instagram bio.
+
+I looked at it the way people look at a comma.
+
+Necessary, perhaps.
+
+Meaningless to me.
+
+I kept scrolling.
+
+Weeks later, somewhere in the middle of an ordinary conversation, you asked,
+
+"Have you ever noticed seeing the same numbers over and over again?"
+
+I hadn't.
+
+You continued,
+
+"Like me. Every time I look at the time, I always see 444."
+
+You called it your angel number.
+
+I remember laughing because I had never heard of angel numbers before.
+
+You talked about life paths and souls and patterns that somehow always seemed to find you.
+
+I listened with the healthy skepticism of someone who trusted equations more than coincidence.`,
+
+`Then you told me what 444 meant.
+
+For better.
+
+For worse.
+
+For always.
+
+I don't remember what we talked about after that.
+
+Funny how memory works.
+
+It throws away entire conversations and keeps one sentence forever.
+
+Nothing about 444 changed.
+
+It still sits exactly where it always has, quietly between 443 and 445.
+
+The clocks didn't slow down.
+
+The universe didn't send signs.
+
+The mathematics remained beautifully indifferent.
+
+The only variable that changed was me.`,
+
+`Now I catch myself looking at clocks I never used to notice.
+
+Airport screens.
+
+Microwaves.
+
+Lock screens.
+
+Cash registers.
+
+Not because I'm searching for proof that the universe is paying attention.
+
+But because once, someone shared something small enough that most people would've forgotten it by dinner.
+
+And I wanted to remember.
+
+I think that's what love quietly does.
+
+It takes things that belong to no one and lets two people borrow them.
+
+A bench.
+
+A song.
+
+A street.
+
+A café.
+
+Three ordinary digits.
+
+None of them become objectively special.
+
+They simply become impossible to experience without thinking of someone else.`,
+
+`Sometimes I wonder how many invisible worlds exist around us.
+
+How many people smile when a certain train passes.
+
+How many still order the same coffee because somebody once liked it.
+
+How many still walk on the left side of the footpath because someone always walked on the right.
+
+How many lives are quietly stitched together by things the rest of us would never notice.
+
+Maybe more than we think.`,
+
+`So if you're reading this and 444 means nothing to you, keep it that way.
+
+Find your own number.
+
+Your own song.
+
+Your own streetlight that turns green at exactly the right moment.
+
+Find the ordinary thing that one day becomes a reason to smile without warning.
+
+Because the greatest love stories are rarely built on extraordinary moments.
+
+They're built on tiny, forgettable details that survive long after the conversations do.`,
+
+`And if you're lucky enough to have someone who hands you something as small as three ordinary digits and says,
+
+"This matters to me,"
+
+hold onto it.
+
+One day you'll wake up and realize it matters to you too.
+
+Not because the universe decided it should.
+
+But because somewhere along the way,
+
+someone quietly chose you,
+
+and left a little piece of themselves in something the rest of the world will never notice.
+
+444.
+
+For better.
+
+For worse.
+
+For always.`
+];
+
+const ch5pages = [
+`There are some days that don't feel important while you're living them.
+
+No arguments.
+
+No revelations.
+
+No life-changing decisions.
+
+Just a Saturday that arrives, passes, and should have been forgotten.
+
+This was one of those days.
+
+Or at least it should have been.`,
+
+`She had plans with her friends.
+
+I remember that much.
+
+I remember being happy she was going out.
+
+Not because I wanted time to myself.
+
+Just because I liked knowing she had a life outside of me.
+
+A life that existed before I arrived and would continue whether I was there or not.
+
+So I decided I'd make plans too.
+
+One friend was with his girlfriend.
+
+Another was working.
+
+The third didn't answer.
+
+Later I found out he'd travelled to another city to visit his sister.
+
+My flatmate, Mizaan, had left for work before I woke up.
+
+The day slowly became one of those days where every possible plan belonged to someone else.
+
+By afternoon I'd stopped checking my phone every few minutes.
+
+By evening I ordered biryani.
+
+Not because I was craving it.
+
+Because it seemed easier than deciding what else to do.`,
+
+`The apartment was quiet.
+
+Not unusually quiet.
+
+Just quiet enough that you notice every small sound.
+
+The refrigerator humming.
+
+Cars passing outside.
+
+The television speaking to an audience of one.
+
+I put on a movie and let it play.
+
+I don't remember which movie.
+
+Only that it was the kind you choose when you don't particularly care what happens in it.
+
+The delivery arrived halfway through.
+
+I paused the movie and walked into the kitchen.
+
+The plate slipped before I realised it was falling.
+
+The crash was enormous.
+
+Ceramic against tile.
+
+Sharp enough to bounce off the walls and rush down the hallway.
+
+For a second I looked up.
+
+Then stayed still.
+
+Waiting.
+
+The television continued talking to itself in the other room.
+
+Nothing else moved.
+
+I looked down at the broken pieces.
+
+Then around the apartment.
+
+Then back at the broken pieces again.
+
+It struck me how strange it was that a sound could feel lonely.
+
+I sat on the kitchen floor.
+
+Not because I had to.
+
+Just because standing felt difficult for some reason.
+
+The biryani sat untouched on the counter.
+
+Outside, somebody laughed.
+
+A car door slammed.
+
+Life continued with remarkable efficiency.
+
+Inside the apartment, nothing happened at all.`,
+
+`I don't remember how long I sat there.
+
+Long enough for the food to get cold.
+
+Long enough for the movie to become irrelevant.
+
+Long enough to realise I hadn't spoken to another person face-to-face all day.
+
+Not once.
+
+It sounds dramatic written down.
+
+It didn't feel dramatic then.
+
+It just felt true.
+
+---
+
+Australia had a way of doing that.
+
+Not the loneliness.
+
+The distance.
+
+The way it quietly rearranged your life.
+
+I had friends.
+
+Good friends.
+
+People I'd watch football with.
+
+People I'd grab lunch with.
+
+People I'd call if I needed help.
+
+But every person I knew in Australia knew me as an adult.
+
+The finished version.
+
+Or at least the version pretending to be finished.
+
+Nobody knew the earlier drafts.
+
+Nobody remembered me from school.
+
+Nobody knew what I looked like before I grew into myself.
+
+Nobody remembered stories I'd forgotten telling.
+
+The history existed.
+
+The witnesses didn't.
+
+Most of the time I didn't think about it.
+
+Then every once in a while, usually on days like that one, I'd feel the absence of it.
+
+Not painfully.
+
+Just enough to notice.`,
+
+`By then she had become part of my routine in ways I hadn't fully realised.
+
+Not in grand ways.
+
+Nothing that would have sounded romantic if I said it out loud.
+
+I just found myself checking the time and knowing roughly what she'd be doing.
+
+Whether she'd be awake.
+
+At work.
+
+On her way home.
+
+Whether she'd probably be busy.
+
+Whether there was a chance my phone would light up.
+
+The same way you learn the route home without consciously memorising it.
+
+Repetition becomes familiarity.
+
+Familiarity becomes habit.
+
+---
+
+Sometimes she would tell me about her day.
+
+Sometimes about work.
+
+Sometimes about absolutely nothing.
+
+The kind of conversations most people forget.
+
+The strange thing is those are usually the conversations I remember.
+
+Not because of what was said.
+
+Because of when they arrived.`,
+
+`I never told her about the plate.
+
+Not properly.
+
+Looking back, I don't think it was because I was hiding anything.
+
+And I don't think it was because she wouldn't have understood.
+
+The truth is simpler.
+
+I wasn't very good at talking about my own loneliness.
+
+Other people's loneliness was easier.
+
+Other people's sadness made sense to me.
+
+My own always felt harder to explain.
+
+So I didn't.
+
+The story stayed where it happened.
+
+In that apartment.
+
+On that kitchen floor.
+
+---
+
+Eventually I cleaned up the broken pieces.
+
+Put the biryani in the microwave.
+
+Tried to restart the movie.
+
+I don't think I made it more than ten minutes.
+
+The film had lost its audience.`,
+
+`Later that night my phone lit up.
+
+A message from her.
+
+I can't remember exactly what it said.
+
+Something about her day.
+
+Something ordinary.
+
+A small story.
+
+The sort of message people send without realising they'll become part of someone's memory.
+
+I read it.
+
+Then read it again.
+
+Not because it was profound.
+
+Because it wasn't.
+
+That was the point.
+
+There was something comforting about the ordinariness of it.
+
+Someone, somewhere on the other side of the world, had decided to tell me about her day.
+
+And somehow that felt important.`,
+
+`The apartment was still quiet.
+
+The dishes were still waiting in the sink.
+
+The movie was still unfinished.
+
+Nothing had really changed.
+
+Yet the evening felt different than it had an hour earlier.
+
+Not happier.
+
+Not fixed.
+
+Just different.
+
+The way a room feels after someone opens a window.
+
+You can't point to the exact thing that's changed.
+
+You just know the air isn't quite the same anymore.
+
+I replied.
+
+She replied back.
+
+The conversation wandered nowhere in particular.
+
+Then eventually the night ended.
+
+Like all nights do.
+
+---
+
+The next morning I threw away the broken pieces of the plate.
+
+I don't remember the movie.
+
+I don't remember what happened the following weekend.
+
+I don't even remember the score of the football match I watched a few days later.
+
+What I remember is the sound.
+
+The silence afterwards.
+
+And a message arriving from a country I'd never visited from a person I'd never met.
+
+At the time, it felt like an ordinary conversation.
+
+Nothing more.
+
+Nothing less.
+
+I didn't know then how much space someone could occupy in your life without ever entering the room.`
+];
+
+// ORIGINAL CHAPTER 6 RESTORED
+const ch6pages = [
+`One year ago today, I didn't know what you were going to become to me.
+
+I knew you were someone I liked talking to. Someone whose messages made me check my phone a little faster. Someone who felt easy to be around, even through a screen.
+
+I didn't know you'd become the person I think of first when something good happens.
+
+Or the person I reach for when everything feels too heavy.
+
+I didn't know we'd build a whole world out of late night calls, shared silence, and three hundred and sixty five days of choosing each other.`,
+
+`People talk about love like it's a sudden thing. A moment where everything changes.
+
+For me, it wasn't like that with you.
+
+It was quieter.
+
+It was every single day where you showed up. Every time you listened when you didn't have to. Every laugh that felt a little lighter because you were sharing it. Every morning where waking up to a message from you made the day feel manageable.
+
+Love wasn't one big moment.
+
+It was three hundred and sixty five small ones.`,
+
+`We have distance between us. Real, physical distance that means I can't reach out and hold your hand when I want to.
+
+And yet—
+
+I have never felt closer to anyone.
+
+You've seen versions of me most people don't get to see. The quiet parts. The tired parts. The parts that don't always know what to say.
+
+And you stayed.
+
+You didn't just stay—you made space for all of it.`,
+
+`Thank you.
+
+Thank you for the way you love. Generously. Patiently. Without making it complicated.
+
+Thank you for every story you've shared, every song you've sent, every late hour you stayed up just to talk to me a little longer.
+
+Thank you for being my constant in a year where everything else kept moving.
+
+I don't know what the next year looks like.
+
+I don't know when the distance ends or how many more days we'll count through a screen.
+
+But I know one thing.
+
+I want all of them with you.
+
+Happy one year.
+
+I love you.`
+];
+
+
+// CHAPTER VII – THE QUIET
+const ch7pages = [
+`There was a time when I could tell you were gone by the way my phone stayed still.
+
+Not literally.
+
+The phone didn't know anything.
+
+It didn't know whether you were sleeping.
+
+Whether you were working.
+
+Whether you were tired.
+
+Whether the day had simply become too much.
+
+It only knew that the screen was dark.
+
+I was the one who gave the darkness meaning.`,
+
+`I remember checking sometimes without even realizing I was doing it.
+
+I'd pick up my phone.
+
+Nothing.
+
+Put it down.
+
+A few minutes later, pick it up again.
+
+Still nothing.
+
+There was never anything particularly dramatic about it.
+
+No argument.
+
+No goodbye.
+
+No reason to think something had changed.
+
+Just silence.
+
+And somehow my mind could turn that silence into a thousand different possibilities.
+
+Maybe she's upset.
+
+Maybe she's tired of talking.
+
+Maybe I said something.
+
+Maybe she's pulling away.
+
+Maybe...
+
+I became very good at the word *maybe*.`,
+
+`The strange thing is that I never really wanted to pressure you.
+
+I wanted to be there.
+
+There is a difference, even if I didn't always understand it.
+
+When you were having a difficult day, my first instinct was to move toward you.
+
+Ask.
+
+Check.
+
+Help.
+
+Fix.
+
+I thought love was supposed to be useful.
+
+If something hurt you, I wanted to take some of the hurt away.
+
+If you were overwhelmed, I wanted to make things lighter.
+
+If you were tired, I wanted to find the thing that would make you less tired.
+
+It took me a while to understand that some days don't need another person trying to solve them.
+
+They just need to end.`,
+
+`I think about that now when you go quiet.
+
+Not always successfully.
+
+I still notice.
+
+Of course I do.
+
+I still miss you.
+
+Sometimes I want to tell you something immediately and then remember that maybe you're sleeping.
+
+Sometimes I want to hear your voice and remember that maybe you don't have one more conversation in you.
+
+Sometimes I look at the last message between us and feel that old little pull.
+
+The one that says,
+
+*Say something.*
+
+*Ask.*
+
+*Make sure we're okay.*
+
+It's still there.
+
+I'm just learning not to obey it every time.`,
+
+`There was a night when your phone died.
+
+You were gone for a while.
+
+And when you finally came back, you explained what had happened.
+
+You didn't have to.
+
+That's what stayed with me.
+
+Not the explanation itself.
+
+The fact that, somewhere in the middle of everything you were dealing with, you still thought about how your silence might make me feel.
+
+You came back and told me.
+
+And I remember thinking that perhaps I had been watching the wrong thing.
+
+I had been watching the silence.
+
+You had been thinking about me inside it.
+
+There was something strangely comforting about that.
+
+Not because I needed an explanation.
+
+Because I didn't.
+
+Because somewhere between the message I hadn't received and the one that eventually arrived, you were still you.
+
+Still caring.
+
+Still there.
+
+Just tired.`,
+
+`You can be unavailable without being absent.
+
+I think I needed to learn that.
+
+Distance makes you count things you never used to count.
+
+Minutes since the last message.
+
+Hours between calls.
+
+Days until the next good conversation.
+
+We look at numbers because numbers feel certain.
+
+But love has never been particularly good at being measured.`,
+
+`I've also started realizing that your exhaustion isn't something I want you to feel guilty about.
+
+I don't want you to be having the worst day of your week, barely holding yourself together, and then see my name on your screen and think,
+
+*I should answer him.*
+
+I don't want loving me to become another task on a list.
+
+Another thing you have to complete before you're allowed to rest.
+
+I don't want to be another weight.
+
+I want to be somewhere you can put the weight down.
+
+That matters to me now.
+
+Maybe more than I know how to explain.`,
+
+`There are days when I still fail at it.
+
+I'll wonder.
+
+I'll worry.
+
+I'll miss you more than usual.
+
+Sometimes I'll have the urge to send another message just because I want to feel the connection again.
+
+And then I stop.
+
+Not because I suddenly don't care.
+
+Because I do.
+
+I think about what your day might have taken from you.
+
+How little energy a person can have left after spending the whole day simply trying to get through it.
+
+And I remind myself:
+
+*She doesn't need to prove anything to me tonight.*
+
+So I put the phone down.
+
+Sometimes I actually manage to leave it there.
+
+That's progress.
+
+Small, unimpressive progress.
+
+But progress.`,
+
+`I used to think giving someone space meant moving away.
+
+Now I think it can mean staying exactly where you are without asking them to come closer.
+
+It can mean saying,
+
+*Take your time.*
+
+And actually meaning it.
+
+It can mean letting someone have a bad day without turning it into a bad day for the relationship.
+
+It can mean trusting that the quiet isn't an ending.
+
+It's just quiet.
+
+And I think about the kind of home I want us to have someday.
+
+Not the house.
+
+Not the city.
+
+Not the room.
+
+The feeling.
+
+I want there to be a kind of silence between us that doesn't frighten either of us.
+
+A silence where you can sit on one side of the room and I can sit on the other and neither of us feels the need to fill it.
+
+A place where being tired doesn't require an apology.
+
+Where saying *I don't have much today* is enough.
+
+Where you don't have to arrive with a smile just because you love me.
+
+Where you can have nothing to give and still know you're loved.`,
+
+`I don't know if I'll ever become completely comfortable with distance.
+
+I hope I don't.
+
+I think a part of me will always wish I could simply walk over to you when you're having a difficult day.
+
+Sit beside you.
+
+Bring you something.
+
+Say nothing.
+
+Maybe that's the cruelest part of loving someone from far away.
+
+You can know exactly what you'd do if you were there.
+
+And still be here.
+
+But perhaps there is something I can do from here.
+
+I can make sure you never have to run toward me just to prove you still want me.
+
+I can let you come when you have the strength.
+
+I can keep the light on without standing at the window.`,
+
+`I think that's the part I didn't understand before.
+
+I thought waiting meant watching.
+
+Watching the phone.
+
+Watching the clock.
+
+Watching for the little sign that everything was okay.
+
+Now I'm trying to make waiting something quieter.
+
+Living my day.
+
+Doing my things.
+
+Letting you have yours.
+
+Knowing that if you need me, I'm here.
+
+And if you don't need me for a little while,
+
+I'm still here.`,
+
+`So if you ever have one of those days again,
+
+the kind that takes everything out of you,
+
+you don't have to worry about me sitting here wondering whether you've stopped loving me.
+
+You don't have to find the energy to reassure me.
+
+You don't have to explain every hour that passed.
+
+You don't have to turn your exhaustion into an apology.
+
+Rest.
+
+Sleep.
+
+Be quiet.
+
+Let the world wait.
+
+I'll understand.
+
+And if I miss you,
+
+I'll carry that myself.
+
+Because missing you isn't something you have to fix.
+
+It's just one of the things that comes with loving you.`,
+
+`You stop asking,
+
+*How do I make sure she never leaves?*
+
+And start asking,
+
+*How do I make sure she always feels safe coming back?*
+
+I think I know my answer now.
+
+I don't chase you through the quiet.
+
+I don't turn your silence into a question.
+
+I don't ask you to carry my fear on top of everything else you're already carrying.
+
+I leave the door open.
+
+That's all.
+
+The rest is yours.`,
+
+`And maybe one day, when we're finally in the same place, I'll remember these nights.
+
+The dark screen.
+
+The unanswered messages.
+
+The hours that once felt so much longer than they really were.
+
+I'll remember how hard it was to learn that silence could mean nothing at all.
+
+And you'll be there.
+
+Maybe sitting beside me.
+
+Maybe tired.
+
+Maybe scrolling through your phone.
+
+Maybe not saying anything.
+
+And I'll know.
+
+Nothing is wrong.
+
+Nothing needs fixing.
+
+You are simply quiet.
+
+And I will be quiet with you.
+
+Until you feel like speaking again.
+
+Until the world feels manageable again.
+
+Until you look over at me.
+
+You won't have to give me anything.
+
+Just know that you never have to.
+
+Because I don't want to be another thing you have to carry.
+
+I want to be the place where you can finally put everything down.
+
+And breathe.`
+];
+
+
+// CHAPTER IX – OCTOBER 7
+const ch9pages = [
+`October 7.
+
+Somewhere, a little girl was born who had no idea how complicated her life would become.
+
+She didn't know about the courses she'd change, the plans that wouldn't work out, the things she'd have to start over, or the people she'd one day have to become for other people.
+
+She definitely didn't know she'd grow up to be someone in Cebu, working graveyard shifts, raising two children, carrying bills and expectations and exhaustion around like they were just another part of getting dressed.
+
+She didn't know she'd become you.
+
+And somehow, I'm glad she did.
+
+I wish I could have met you before everything got heavy.
+
+Before you learned to measure yourself against what you thought you should have become.
+
+Because sometimes when you talk about your life, I can hear the accounting in it.
+
+This worked out.
+
+This didn't.
+
+I changed this.
+
+I couldn't finish that.
+
+My grandparents gave me so much and look where I ended up.
+
+As if a life can be reduced to a list of returns on an investment.
+
+But I don't think your grandparents' love became meaningless because your life didn't follow the map they imagined.
+
+You were trying to find your way with information you didn't have yet.
+
+And you kept going.
+
+That part matters more to me than the map ever could.
+
+I think about the person I know now.
+
+The woman who can spend a whole night working while half the world is asleep.
+
+The mother who still has things to do when she's already tired.
+
+The daughter and granddaughter and friend who keeps showing up.
+
+The person who sometimes needs to disappear into the quiet for a while because there isn't much left to give.
+
+And then somehow, somewhere in all of that, there is still your laugh.
+
+That laugh.
+
+The one you don't always seem to understand why I love.
+
+I've heard it through a screen, through bad connections, in the middle of conversations that were supposed to end hours earlier.
+
+Sometimes it appears when you forget you're supposed to be composed.
+
+That's probably why I love it.
+
+It doesn't sound rehearsed.
+
+It sounds like you.`,
+
+`There are so many pieces of us that exist in strange little places.
+
+A <em>Friends</em> episode playing somewhere in the background.
+
+Football on another screen.
+
+One of us saying, "We should sleep."
+
+Neither of us sleeping.
+
+A notification appearing when it shouldn't matter as much as it does.
+
+A deleted message that makes you wonder what was almost said.
+
+4:44 in the morning.
+
+The kind of hour where the whole world feels paused and somehow we're still awake, still talking, still there.
+
+For better, for worse, for always.
+
+Four four four.
+
+We've never needed a grand setting for most of the things that became important to us.
+
+Maybe that's what I like most.
+
+It's never really been the big moments.
+
+It's the ordinary ones.
+
+The ceilings.
+
+The waiting.
+
+The silence after a conversation.
+
+The strange comfort of knowing someone is on the other side of the screen even when neither of you is saying anything.
+
+You once called me your true north.
+
+I've thought about that more than I've probably told you.
+
+Not because I think I know where every road leads.
+
+I don't.
+
+I just hope that when the road gets confusing, you know there is somewhere you can look without having to explain yourself first.`,
+
+`And I know I've given you reasons to question my words before.
+
+I'm sorry for the hurt I caused you.
+
+I won't turn your birthday into another place where you have to carry that.
+
+I just want to say that I remember it, and I understand that trust isn't repaired by saying the right sentence once.
+
+It's built in the small things.
+
+So maybe that's what I want for you this year.
+
+Not some perfect version of your life.
+
+Not a year where everything suddenly falls into place.
+
+Just more small things that feel kind.
+
+A little less worry about money.
+
+A little more sleep.
+
+More reasons to laugh without checking whether your laugh sounds right.
+
+More moments where you aren't somebody's mother, somebody's daughter, somebody's employee, somebody who needs to keep going.
+
+Just you.
+
+And maybe a few quiet wins that nobody else notices.
+
+I hope you get some of those.
+
+I hope one day you look around and realize that the life you thought was evidence against you was actually full of proof that you kept choosing to stay in it.`,
+
+`And selfishly, I hope I get to see some of it.
+
+Not through a screen.
+
+Not with a call between us and the rest of the world.
+
+Just you and me, in the same room.
+
+Maybe you're laughing about something stupid.
+
+Maybe I'm pretending I didn't hear you because I want you to keep laughing.
+
+Maybe there isn't anything important to say.
+
+I think I'd like that.
+
+After all this distance, after all these nights, maybe the first thing I'd want is something completely ordinary.
+
+To sit beside you.
+
+To hear your laugh without a microphone carrying it to me.
+
+To look over and think,
+
+There you are.
+
+The little girl who had no idea.
+
+The woman who kept going anyway.
+
+My true north.
+
+Happy birthday, Baby.
+
+I'm glad you were born.
+
+And I'm even more grateful that, somehow, in all the noise and distance and wrong turns, you found your way to me.
+
+For better, for worse, for always.
+
+444.`
+];
+
+const chPages = {1:ch1pages, 2:ch2pages, 3:ch3pages, 4:ch4pages, 5:ch5pages, 6:ch6pages, 7:ch7pages, 9:ch9pages};
+const chCurrent = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0, 7:0, 9:0};
+
+function renderChapter(ch, page) {
+  const pages = chPages[ch];
+  document.getElementById('ch'+ch+'prose').innerHTML = pages[page].split('\n\n').map(p=>'<p>'+p.replace(/\n/g,'<br>')+'</p>').join('');
+  document.getElementById('ch'+ch+'pager').textContent = (page+1)+' / '+pages.length;
+  document.getElementById('ch'+ch+'prev').disabled = page===0;
+  document.getElementById('ch'+ch+'next').disabled = page===pages.length-1;
+  chCurrent[ch] = page;
+}
+
+function openChapter(ch) {
+  document.getElementById('contents-view').style.display='none';
+  [1,2,3,4,5,6,7,9].forEach(n=>document.getElementById('reader-ch'+n).style.display='none');
+  document.getElementById('reader-ch'+ch).style.display='block';
+  renderChapter(ch,0);
+}
+function closeChapter(ch) {
+  document.getElementById('reader-ch'+ch).style.display='none';
+  document.getElementById('contents-view').style.display='block';
+}
+
+function setupChapters() {
+  [1,2,3,4,5,6,7,9].forEach(ch => {
+    document.getElementById('link-ch'+ch).addEventListener('click',()=>openChapter(ch));
+    document.getElementById('back-ch'+ch).addEventListener('click',()=>closeChapter(ch));
+    document.getElementById('ch'+ch+'prev').addEventListener('click',()=>{if(chCurrent[ch]>0)renderChapter(ch,chCurrent[ch]-1);});
+    document.getElementById('ch'+ch+'next').addEventListener('click',()=>{if(chCurrent[ch]<chPages[ch].length-1)renderChapter(ch,chCurrent[ch]+1);});
+  });
+}
+
+function setupButtons() {
+  document.getElementById('spinBtn').addEventListener('click',spinWheel);
+  document.getElementById('factBtn').addEventListener('click',showFact);
+  document.getElementById('missBtn').addEventListener('click',missMe);
+  document.getElementById('postBtn').addEventListener('click',addMessage);
+  document.getElementById('imageUpload').addEventListener('change',addImage);
+}
+</script>
+</body>
+</html>
